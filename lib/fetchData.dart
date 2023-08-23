@@ -1,16 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'dialogPopUp.dart';
+typedef void UserInfoCallback(String userName);
 
-Future<void> fetchUserInfo({
+Future fetchUserInfo({
   required String inputEmail,
   required int inputPassword,
-  required BuildContext context,
-  required String popupLabel,
-  required String popupBtnText,
-  required Function callBack,
+  required UserInfoCallback callback,
 }) async {
   final response =
       await http.get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
@@ -18,23 +14,8 @@ Future<void> fetchUserInfo({
 
   for (var user in data) {
     if (user['email'] == inputEmail && user['id'] == inputPassword) {
-      final userInfo = "Name: ${user['name']}\n"
-          "Email: ${user['email']}\n"
-          "Username: ${user['username']}\n"
-          "Phone: ${user['phone']}\n"
-          "Website: ${user['website']}";
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CustomAlertDialog(
-            title: popupLabel,
-            content: userInfo,
-            btnText: popupBtnText,
-            callBack: callBack,
-          );
-        },
-      );
+      final userName = "Xin chào, ${user['name']}";
+      callback(userName);
       break;
     }
   }

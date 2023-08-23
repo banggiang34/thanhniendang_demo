@@ -41,7 +41,10 @@ class _BuildEmailBoxState extends State<BuildEmailBox> {
         ),
       ),
       validator: (value) {
-        if (!EmailValidator.validate(value!)) {
+        if (!EmailValidator.validate(value!) ||
+            value.isEmpty ||
+            value.trim().length <= 1 ||
+            value.trim().length > 50) {
           return 'Địa chỉ email không đúng định dạng';
         }
         return null;

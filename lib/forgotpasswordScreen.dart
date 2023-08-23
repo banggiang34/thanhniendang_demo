@@ -11,6 +11,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,40 +43,42 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               horizontal: 25,
               vertical: 30,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Nhập địa chỉ email bạn đã đăng ký',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff484848),
+            child: Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Nhập địa chỉ email bạn đã đăng ký',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff484848),
+                    ),
                   ),
-                ),
-                SizedBox(height: 15),
-                BuildEmailBox(
-                    controller: _emailController, hinttext: 'Địa chỉ email'),
-                SizedBox(height: 20),
-                BuildLogSignInBtn(
-                  labeltext: 'Tiếp tục',
-                  callback: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return CustomAlertDialog(
-                              callBack: () {
-                                Navigator.of(context).pop();
-                              },
-                              title: 'Đã gửi mật khẩu mới',
-                              content:
-                                  'Mật khẩu mới đã được gửi đến địa chỉ email bạn sử dụng để đăng ký tài khoản.\n\nVui lòng kiểm tra hộp thư đến và làm theo hướng dẫn.',
-                              btnText: 'Đã hiểu');
-                        });
-                  },
-                )
-              ],
+                  SizedBox(height: 15),
+                  BuildEmailBox(
+                      controller: _emailController, hinttext: 'Địa chỉ email'),
+                  SizedBox(height: 20),
+                  BuildLogSignInBtn(
+                    labeltext: 'Tiếp tục',
+                    callback: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CustomAlertDialog(
+                                callBack: () {
+                                  Navigator.of(context).pop();
+                                },
+                                title: 'Đã gửi mật khẩu mới',
+                                content:
+                                    'Mật khẩu mới đã được gửi đến địa chỉ email bạn sử dụng để đăng ký tài khoản.\n\nVui lòng kiểm tra hộp thư đến và làm theo hướng dẫn.',
+                                btnText: 'Đã hiểu');
+                          });
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class BuildFillBox extends StatelessWidget {
   final String hinttext;
-  const BuildFillBox({required this.hinttext});
+  final TextEditingController controller;
+  const BuildFillBox({required this.hinttext, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +11,7 @@ class BuildFillBox extends StatelessWidget {
       alignment: Alignment.centerLeft,
       height: 60,
       child: TextField(
+        controller: controller,
         keyboardType: TextInputType.name,
         style: TextStyle(
           color: Colors.black,
