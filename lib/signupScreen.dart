@@ -9,6 +9,8 @@ import 'package:thanh_nien_da_nang/buildpasswordBox.dart';
 import 'package:http/http.dart' as http;
 import 'package:thanh_nien_da_nang/dialogPopUp.dart';
 
+import 'buildconfirmpassBox.dart';
+
 class SignUpScreen extends StatefulWidget {
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -117,12 +119,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       hinttext: 'Số điện thoại',
                       controller: _phoneNumberController),
                   SizedBox(height: 20),
-                  BuildPasswordBox(
-                      controller: _passwordController, hinttext: 'Mật khẩu'),
                   SizedBox(height: 20),
-                  BuildPasswordBox(
-                      controller: _passwordController,
-                      hinttext: 'Nhập lại mật khẩu'),
+                  BuildConfirmPasswordBox(controller: _passwordController),
                   SizedBox(height: 20),
                   BuildLogSignInBtn(
                       labeltext: 'Đăng ký',

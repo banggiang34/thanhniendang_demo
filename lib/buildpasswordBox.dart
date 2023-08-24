@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 class BuildPasswordBox extends StatefulWidget {
   const BuildPasswordBox({
     //this.fieldKey,
-    required this.hinttext,
     this.validator,
     this.onFieldSubmitted,
     required this.controller,
   });
 
   //final Key? fieldKey;
-  final String hinttext;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onFieldSubmitted;
   final TextEditingController controller;
@@ -37,7 +35,7 @@ class _BuildPasswordBoxState extends State<BuildPasswordBox> {
       validator: widget.validator,
       //onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
-        hintText: widget.hinttext,
+        hintText: 'Mật khẩu',
         hintStyle: TextStyle(
           color: Color(0xffA3A3A3),
           fontSize: 17,

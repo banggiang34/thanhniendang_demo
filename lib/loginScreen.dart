@@ -182,8 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 20),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: BuildPasswordBox(
-                        controller: _passwordController, hinttext: 'Mật khẩu'),
+                    child: BuildPasswordBox(controller: _passwordController),
                   ),
                   SizedBox(height: 20),
                   Align(

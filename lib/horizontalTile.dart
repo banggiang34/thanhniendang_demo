@@ -9,6 +9,7 @@ class HorizontalTile extends StatelessWidget {
   final String date;
   final String todate;
   final String time;
+  final String joined;
 
   const HorizontalTile({
     super.key,
@@ -19,6 +20,7 @@ class HorizontalTile extends StatelessWidget {
     required this.date,
     required this.todate,
     required this.time,
+    required this.joined,
   });
 
   @override
@@ -69,6 +71,45 @@ class HorizontalTile extends StatelessWidget {
                                   ),
                                 ),
                               ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: time.isNotEmpty,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 20),
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                            width: 160,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              color: Color(0xff00B191),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Row(
+                                children: [
+                                  Image.asset('images/users1.png'),
+                                  SizedBox(width: 3),
+                                  Center(
+                                    child: Text(
+                                      joined + ' người tham gia',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
