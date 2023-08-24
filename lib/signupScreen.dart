@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/buildemailBox.dart';
@@ -19,19 +21,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneNumberController = TextEditingController();
 
   Future<void> _registerUser() async {
-    final apiUrl = 'https://intern.try0.xyz/api/v1//account/member/register/';
+    final apiUrl =
+        Uri.parse('https://intern.try0.xyz/api/v1/account/member/register/');
 
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      body: {
-        'email': _emailController.text,
-        'password': _passwordController.text,
-        'full_name': _fullNameController.text,
-        'mobile': _phoneNumberController.text,
-      },
-    );
+    final body = jsonEncode({
+      'email': _emailController.text,
+      'password': _passwordController.text,
+      'full_name': _fullNameController.text,
+      'mobile': _phoneNumberController.text,
+    });
+
+    final response = await http.post(apiUrl,
+        body: body, headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
-      print('User registered successfully');
+      print('con meo thanh cong');
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -43,7 +46,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           });
     } else {
-      print('Failed to register user');
+      print('that bai con meo');
+      print(response.body);
+      print(_phoneNumberController.text);
       showDialog(
           context: context,
           builder: (BuildContext context) {
