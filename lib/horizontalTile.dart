@@ -27,20 +27,26 @@ class HorizontalTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
-      //height: 100000,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
-            child: Container(
-              //width: 185,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+              child: Container(
+                width: 200,
+                height: 120,
                 child: Stack(
                   children: [
-                    Image.asset(imagePath, fit: BoxFit.fill),
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: Image.asset(imagePath),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 20),
@@ -122,9 +128,8 @@ class HorizontalTile extends StatelessWidget {
           ),
           Flexible(
             child: Container(
-              padding: EdgeInsets.only(top: 10, left: 3, right: 3),
-              width: 175,
-              //height: 13,
+              //padding: EdgeInsets.only(top: 10, left: 3, right: 3),
+              width: 200,
               color: Colors.white,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 8),
@@ -147,12 +152,15 @@ class HorizontalTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Flexible(child: SizedBox(height: 5)),
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                    Container(
+                      padding: EdgeInsets.only(top: 8, bottom: 8),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                     Flexible(child: SizedBox(height: 10)),
@@ -178,7 +186,7 @@ class HorizontalTile extends StatelessWidget {
                           Image.asset('images/clock1.png'),
                           SizedBox(width: 3),
                           Text(
-                            time,
+                            time + ' phút',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,

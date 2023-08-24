@@ -121,10 +121,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   BuildConfirmPasswordBox(controller: _passwordController),
                   SizedBox(height: 20),
                   BuildLogSignInBtn(
-                      labeltext: 'Đăng ký',
-                      callback: () {
-                        _registerUser();
-                      })
+                    labeltext: 'Đăng ký',
+                    callback: () {
+                      _registerUser();
+                    },
+                  )
                 ],
               ),
             ),

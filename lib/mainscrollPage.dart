@@ -15,7 +15,85 @@ class MainScrollPage extends StatefulWidget {
   State<MainScrollPage> createState() => _MainScrollPageState();
 }
 
+class CategorizedNewsData {
+  final String imagePath;
+  final String categoryimagePath;
+  final String category;
+  final String joined;
+  final String title;
+  final String date;
+  final String todate;
+  final String time;
+
+  CategorizedNewsData({
+    required this.imagePath,
+    required this.categoryimagePath,
+    required this.category,
+    required this.joined,
+    required this.title,
+    required this.date,
+    required this.todate,
+    required this.time,
+  });
+}
+
 class _MainScrollPageState extends State<MainScrollPage> {
+  List<CategorizedNewsData> categorizedNewsList = [
+    CategorizedNewsData(
+      imagePath: 'images/nguoigia1.png',
+      categoryimagePath: 'images/old-people1.png',
+      category: 'Giúp đỡ người già',
+      joined: '',
+      title: 'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
+      date: '15/07',
+      todate: '16/07',
+      time: '',
+    ),
+    CategorizedNewsData(
+      imagePath: 'images/hienmau1.png',
+      categoryimagePath: 'images/blood-donation1.png',
+      category: 'Hiến máu',
+      joined: '',
+      title: 'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
+      date: '03/07',
+      todate: '13/07',
+      time: '',
+    ),
+    CategorizedNewsData(
+      imagePath: 'images/login.png',
+      categoryimagePath: 'images/old-people1.png',
+      category: 'conmeo',
+      joined: '',
+      title: 'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
+      date: '03/07',
+      todate: '13/07',
+      time: '',
+    ),
+  ];
+  List<CategorizedNewsData> contestsList = [
+    CategorizedNewsData(
+      imagePath: 'images/lephatdong.png',
+      categoryimagePath: 'images/users1.png',
+      category: '',
+      joined: '145',
+      title:
+          'Cuộc thi trực tuyến tìm hiểu nghị định đại hội toàn đoàn lần thứ XII',
+      date: '15/07',
+      todate: '16/07',
+      time: '30',
+    ),
+    CategorizedNewsData(
+      imagePath: 'images/seminar.png',
+      categoryimagePath: 'images/users1.png',
+      category: '',
+      joined: '80',
+      title: 'Sáng kiến thanh niên giải quyết vấn đề thúc đẩy bình đẳng giới',
+      date: '03/07',
+      todate: '13/07',
+      time: '15',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +208,9 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           onPressed: () => print('conmeo'),
                           icon: Image.asset(
                             'images/bellnoti.png',
+                            fit: BoxFit.fill,
                           ),
+                          iconSize: 50,
                         ),
                       ),
                     ),
@@ -328,42 +408,21 @@ class _MainScrollPageState extends State<MainScrollPage> {
                 SizedBox(height: 15),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: 250,
-                  child: CategorizedNews(
-                    category1: 'Giúp đỡ người già',
-                    category2: 'Hiến máu',
-                    category3: 'for us',
-                    category4: 'for him',
-                    categoryimagePath1: 'images/old-people1.png',
-                    categoryimagePath2: 'images/blood-donation1.png',
-                    categoryimagePath3: 'images/nguoigia1.png',
-                    categoryimagePath4: 'images/nguoigia1.png',
-                    date1: '15/07',
-                    date2: '03/07',
-                    date3: '13/08',
-                    date4: '11/04',
-                    todate1: '16/07',
-                    todate2: '13/07',
-                    todate3: '04/04',
-                    todate4: '11/04',
-                    imagePath1: 'images/nguoigia1.png',
-                    imagePath2: 'images/hienmau1.png',
-                    imagePath3: 'images/nguoigia1.png',
-                    imagePath4: 'images/nguoigia1.png',
-                    time1: '',
-                    time2: '',
-                    time3: '',
-                    time4: '',
-                    title1:
-                        'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
-                    title2:
-                        'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
-                    title3: '25',
-                    title4: '67',
-                    joined1: '',
-                    joined2: '',
-                    joined3: '',
-                    joined4: '',
+                  height: 300,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categorizedNewsList.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          CategorizedNews(
+                            index: index,
+                            newsDataList: categorizedNewsList,
+                          ),
+                          SizedBox(width: 10),
+                        ],
+                      );
+                    },
                   ),
                 ),
                 SizedBox(height: 25),
@@ -408,43 +467,58 @@ class _MainScrollPageState extends State<MainScrollPage> {
                 SizedBox(height: 15),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: 250,
-                  child: CategorizedNews(
-                    category1: '',
-                    category2: '',
-                    category3: '',
-                    category4: '',
-                    categoryimagePath1: 'images/users1.png',
-                    categoryimagePath2: 'images/users1.png',
-                    categoryimagePath3: 'images/users1.png',
-                    categoryimagePath4: 'images/users1.png',
-                    date1: '15/07',
-                    date2: '03/07',
-                    date3: '13/08',
-                    date4: '11/04',
-                    todate1: '16/07',
-                    todate2: '13/07',
-                    todate3: '04/04',
-                    todate4: '11/04',
-                    imagePath1: 'images/lephatdong.png',
-                    imagePath2: 'images/seminar.png',
-                    imagePath3: 'images/nguoigia1.png',
-                    imagePath4: 'images/nguoigia1.png',
-                    time1: '30 phút',
-                    time2: '15 phút',
-                    time3: '30 phút',
-                    time4: '30 phút',
-                    title1:
-                        'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
-                    title2:
-                        'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
-                    title3: '25',
-                    title4: '67',
-                    joined1: '145',
-                    joined2: '80',
-                    joined3: '80',
-                    joined4: '12',
+                  height: 300,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: contestsList.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          CategorizedNews(
+                            index: index,
+                            newsDataList: contestsList,
+                          ),
+                          SizedBox(width: 10),
+                        ],
+                      );
+                    },
                   ),
+                  // child: CategorizedNews(
+                  //   category1: '',
+                  //   category2: '',
+                  //   category3: '',
+                  //   category4: '',
+                  //   categoryimagePath1: 'images/users1.png',
+                  //   categoryimagePath2: 'images/users1.png',
+                  //   categoryimagePath3: 'images/users1.png',
+                  //   categoryimagePath4: 'images/users1.png',
+                  //   date1: '15/07',
+                  //   date2: '03/07',
+                  //   date3: '13/08',
+                  //   date4: '11/04',
+                  //   todate1: '16/07',
+                  //   todate2: '13/07',
+                  //   todate3: '04/04',
+                  //   todate4: '11/04',
+                  //   imagePath1: 'images/lephatdong.png',
+                  //   imagePath2: 'images/seminar.png',
+                  //   imagePath3: 'images/nguoigia1.png',
+                  //   imagePath4: 'images/nguoigia1.png',
+                  //   time1: '30 phút',
+                  //   time2: '15 phút',
+                  //   time3: '30 phút',
+                  //   time4: '30 phút',
+                  //   title1:
+                  //       'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
+                  //   title2:
+                  //       'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
+                  //   title3: '25',
+                  //   title4: '67',
+                  //   joined1: '145',
+                  //   joined2: '80',
+                  //   joined3: '80',
+                  //   joined4: '12',
+                  // ),
                 ),
               ],
             ),
