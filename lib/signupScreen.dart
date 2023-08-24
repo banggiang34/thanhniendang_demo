@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/buildemailBox.dart';
 import 'package:thanh_nien_da_nang/buildfillBox.dart';
 import 'package:thanh_nien_da_nang/buildlogsigninBtn.dart';
-import 'package:thanh_nien_da_nang/buildpasswordBox.dart';
 import 'package:http/http.dart' as http;
 import 'package:thanh_nien_da_nang/dialogPopUp.dart';
 
@@ -118,7 +117,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   BuildFillBox(
                       hinttext: 'Số điện thoại',
                       controller: _phoneNumberController),
-                  SizedBox(height: 20),
                   SizedBox(height: 20),
                   BuildConfirmPasswordBox(controller: _passwordController),
                   SizedBox(height: 20),

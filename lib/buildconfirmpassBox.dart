@@ -12,7 +12,7 @@ class BuildConfirmPasswordBox extends StatefulWidget {
 }
 
 class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
-  final TextEditingController _passwordController = TextEditingController();
+  //final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _showError = false;
@@ -71,7 +71,7 @@ class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
             ),
           ),
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 20),
         TextFormField(
           controller: _confirmPasswordController,
           obscureText: _obscureText,
