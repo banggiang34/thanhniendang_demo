@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/categorizedNews.dart';
 import 'package:thanh_nien_da_nang/highlightNews.dart';
+import 'package:thanh_nien_da_nang/latestNews.dart';
 import 'package:thanh_nien_da_nang/loginScreen.dart';
+import 'package:thanh_nien_da_nang/verticleTile.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;
@@ -33,6 +35,18 @@ class CategorizedNewsData {
     required this.title,
     required this.date,
     required this.todate,
+    required this.time,
+  });
+}
+
+class LatestNewsData {
+  final String imagePath;
+  final String title;
+  final String time;
+
+  LatestNewsData({
+    required this.imagePath,
+    required this.title,
     required this.time,
   });
 }
@@ -93,6 +107,30 @@ class _MainScrollPageState extends State<MainScrollPage> {
       time: '15',
     ),
   ];
+
+  List<LatestNewsData> latestNewsList = [
+    LatestNewsData(
+      imagePath: 'images/run1.png',
+      title: 'Đà Nẵng: Phát triển phong trào chạy bộ trong toàn dân',
+      time: '12 phút trước',
+    ),
+    LatestNewsData(
+      imagePath: 'images/run2.png',
+      title:
+          'Cuộc thi trực tuyến tìm hiểu nghị định đại hội toàn đoàn lần thứ XII',
+      time: '2 giờ trước',
+    ),
+  ];
+
+  List<Widget> buildVerticalTiles(List<CategorizedNewsData> dataList) {
+    return dataList.map((data) {
+      return VerticleTile(
+        title: data.title,
+        imagePath: data.imagePath,
+        time: data.time,
+      );
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -356,7 +394,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(height: 30),
@@ -483,43 +521,118 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       );
                     },
                   ),
-                  // child: CategorizedNews(
-                  //   category1: '',
-                  //   category2: '',
-                  //   category3: '',
-                  //   category4: '',
-                  //   categoryimagePath1: 'images/users1.png',
-                  //   categoryimagePath2: 'images/users1.png',
-                  //   categoryimagePath3: 'images/users1.png',
-                  //   categoryimagePath4: 'images/users1.png',
-                  //   date1: '15/07',
-                  //   date2: '03/07',
-                  //   date3: '13/08',
-                  //   date4: '11/04',
-                  //   todate1: '16/07',
-                  //   todate2: '13/07',
-                  //   todate3: '04/04',
-                  //   todate4: '11/04',
-                  //   imagePath1: 'images/lephatdong.png',
-                  //   imagePath2: 'images/seminar.png',
-                  //   imagePath3: 'images/nguoigia1.png',
-                  //   imagePath4: 'images/nguoigia1.png',
-                  //   time1: '30 phút',
-                  //   time2: '15 phút',
-                  //   time3: '30 phút',
-                  //   time4: '30 phút',
-                  //   title1:
-                  //       'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
-                  //   title2:
-                  //       'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
-                  //   title3: '25',
-                  //   title4: '67',
-                  //   joined1: '145',
-                  //   joined2: '80',
-                  //   joined3: '80',
-                  //   joined4: '12',
-                  // ),
                 ),
+                SizedBox(height: 25),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              'Tin tức mới',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Container(
+                              width: 30,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xffF5F5F5),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.arrow_forward,
+                                  color: Color(0xff8A8A8A),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: latestNewsList.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      //final newsData = entry.value;
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: LatestNews(
+                          index: index,
+                          newsDataList: latestNewsList,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // Container(
+                //   padding: EdgeInsets.symmetric(horizontal: 20),
+                //   child: Column(
+                //     children: buildVerticalTiles(latestNewsList),
+                //   ),
+                // ),
+                Stack(
+                  children: [
+                    Container(
+                      height: 270,
+                      child: Center(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Color(0xff8A8A8A),
+                            ),
+                            children: [
+                              TextSpan(
+                                text: '© 2023. Ứng dụng',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextSpan(
+                                text: ' Tuổi trẻ Đà Nẵng',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '\n Một sản phẩm của Thành đoàn Đà Nẵng.',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        child: Image.asset(
+                          'images/footer.png',
+                          fit: BoxFit.fitWidth,
+                        ),
+                      ),
+                    ),
+                  ],
+                ), //Bottom background image
               ],
             ),
           ),

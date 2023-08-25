@@ -10,8 +10,6 @@ import 'package:thanh_nien_da_nang/forgotpasswordScreen.dart';
 import 'package:thanh_nien_da_nang/mainscrollPage.dart';
 import 'package:thanh_nien_da_nang/signupScreen.dart';
 
-import 'fetchData.dart';
-
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -242,24 +240,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         } else {
                           print('Login failed: ${response.statusCode}');
                         }
-
-                        // fetchUserInfo(
-                        //   inputEmail: _emailController.text,
-                        //   inputPassword: int.parse(_passwordController.text),
-                        //   callback: (userName) {
-                        //     setState(() {
-                        //       userName =
-                        //           userName; // Update the userName variable
-                        //     });
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => MainScrollPage(
-                        //                 userName: userName,
-                        //               )),
-                        //     );
-                        //   },
-                        // );
                       },
                     ),
                   ),

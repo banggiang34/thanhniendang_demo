@@ -29,7 +29,7 @@ class HorizontalTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        //mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
             child: ClipRRect(
@@ -37,11 +37,11 @@ class HorizontalTile extends StatelessWidget {
                   topRight: Radius.circular(20), topLeft: Radius.circular(20)),
               child: Container(
                 width: 200,
-                height: 120,
+                height: 200,
                 child: Stack(
                   children: [
                     AspectRatio(
-                      aspectRatio: 16 / 9,
+                      aspectRatio: 16 / 11,
                       child: FittedBox(
                         fit: BoxFit.cover,
                         child: Image.asset(imagePath),
@@ -128,8 +128,8 @@ class HorizontalTile extends StatelessWidget {
           ),
           Flexible(
             child: Container(
-              //padding: EdgeInsets.only(top: 10, left: 3, right: 3),
               width: 200,
+              height: 300,
               color: Colors.white,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 8),
@@ -163,7 +163,6 @@ class HorizontalTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Flexible(child: SizedBox(height: 10)),
                     Row(
                       children: [
                         Image.asset('images/calendar1.png'),
