@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/buildemailBox.dart';
-import 'package:thanh_nien_da_nang/buildlogsigninBtn.dart';
-import 'package:thanh_nien_da_nang/dialogPopUp.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildemailBox.dart';
+import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
+import 'package:thanh_nien_da_nang/Elements/PopUpBox/dialogPopUp.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -13,6 +13,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  bool _isLoading = false;
 
   Future<void> _sendForgotPasswordRequest() async {
     final String apiUrl =
@@ -32,6 +33,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
 
     if (response.statusCode == 200) {
+      setState(() {
+        _isLoading = false;
+      });
       showDialog(
           context: context,
           builder: (context) {
@@ -45,6 +49,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 btnText: 'Đã hiểu');
           });
     } else {
+      setState(() {
+        _isLoading = false;
+      });
       print('Error sending password reset request: ${response.reasonPhrase}');
     }
   }
@@ -55,7 +62,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Quên mật khẩu',
           style: TextStyle(
             fontSize: 17,
@@ -63,12 +70,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             color: Color(0xff1F1F1F),
           ),
         ),
-        backgroundColor: Color(0xffFFFFFF),
+        backgroundColor: const Color(0xffFFFFFF),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
       ),
@@ -76,7 +83,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 25,
               vertical: 30,
             ),
@@ -85,7 +92,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Nhập địa chỉ email bạn đã đăng ký',
                     style: TextStyle(
                       fontSize: 16,
@@ -93,14 +100,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       color: Color(0xff484848),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   BuildEmailBox(
                       controller: _emailController, hinttext: 'Địa chỉ email'),
-                  SizedBox(height: 20),
-                  BuildLogSignInBtn(
-                    labeltext: 'Tiếp tục',
-                    callback: _sendForgotPasswordRequest,
-                  )
+                  const SizedBox(height: 20),
+                  _isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : BuildLogSignInBtn(
+                          labeltext: 'Tiếp tục',
+                          callback: () {
+                            _sendForgotPasswordRequest;
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          },
+                        )
                 ],
               ),
             ),

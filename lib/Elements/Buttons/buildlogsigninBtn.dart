@@ -13,16 +13,16 @@ class BuildLogSignInBtn extends StatelessWidget {
         onPressed: () => callback(),
         child: Text(labeltext),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          textStyle: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-          primary: Color(0xff0269E9),
-          onPrimary: Colors.white,
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            textStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+            primary: const Color(0xff0269E9),
+            onPrimary: Colors.white,
+            elevation: 0),
       ),
     );
   }

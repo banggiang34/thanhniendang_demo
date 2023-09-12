@@ -13,28 +13,29 @@ class BuildFillBox extends StatelessWidget {
       child: TextField(
         controller: controller,
         keyboardType: TextInputType.name,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontSize: 17,
           fontWeight: FontWeight.w500,
         ),
         decoration: InputDecoration(
             hintText: hinttext,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Color(0xffA3A3A3),
               fontSize: 17,
               fontWeight: FontWeight.w400,
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: Color(0xffDDDDDD).withOpacity(0.2), width: 2),
+                  color: const Color(0xffDDDDDD).withOpacity(0.2), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff0269E9), width: 2),
+              borderSide: const BorderSide(color: Color(0xff0269E9), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 20)),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 20)),
       ),
     );
   }

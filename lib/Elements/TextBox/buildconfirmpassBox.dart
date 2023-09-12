@@ -12,7 +12,6 @@ class BuildConfirmPasswordBox extends StatefulWidget {
 }
 
 class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
-  //final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   bool _showError = false;
@@ -35,33 +34,34 @@ class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
         TextFormField(
           controller: widget.controller,
           obscureText: _obscureText,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 17,
             fontWeight: FontWeight.w500,
           ),
           decoration: InputDecoration(
             hintText: 'Mật khẩu',
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Color(0xffA3A3A3),
               fontSize: 17,
               fontWeight: FontWeight.w400,
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffDDDDDD), width: 2),
+              borderSide: const BorderSide(color: Color(0xffDDDDDD), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff0269E9), width: 2),
+              borderSide: const BorderSide(color: Color(0xff0269E9), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
-            contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 14),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureText
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: Color(0xffA3A3A3),
+                color: const Color(0xffA3A3A3),
               ),
               onPressed: () {
                 setState(() {
@@ -71,11 +71,11 @@ class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         TextFormField(
           controller: _confirmPasswordController,
           obscureText: _obscureText,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 17,
             fontWeight: FontWeight.w500,
@@ -83,26 +83,27 @@ class _BuildConfirmPasswordBoxState extends State<BuildConfirmPasswordBox> {
           decoration: InputDecoration(
             hintText: 'Nhập lại mật khẩu',
             errorText: _showError ? 'Passwords do not match' : null,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Color(0xffA3A3A3),
               fontSize: 17,
               fontWeight: FontWeight.w400,
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffDDDDDD), width: 2),
+              borderSide: const BorderSide(color: Color(0xffDDDDDD), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff0269E9), width: 2),
+              borderSide: const BorderSide(color: Color(0xff0269E9), width: 2),
               borderRadius: BorderRadius.circular(12),
             ),
-            contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 14),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
             suffixIcon: IconButton(
               icon: Icon(
                 _obscureText
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: Color(0xffA3A3A3),
+                color: const Color(0xffA3A3A3),
               ),
               onPressed: () {
                 setState(() {

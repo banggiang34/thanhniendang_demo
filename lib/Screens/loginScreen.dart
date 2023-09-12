@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/buildemailBox.dart';
-import 'package:thanh_nien_da_nang/buildlogsigninBtn.dart';
-import 'package:thanh_nien_da_nang/buildpasswordBox.dart';
-import 'package:thanh_nien_da_nang/forgotpasswordScreen.dart';
-import 'package:thanh_nien_da_nang/mainscrollPage.dart';
-import 'package:thanh_nien_da_nang/signupScreen.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildemailBox.dart';
+import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildpasswordBox.dart';
+import 'package:thanh_nien_da_nang/Screens/forgotpasswordScreen.dart';
+import 'package:thanh_nien_da_nang/Screens/mainscrollPage.dart';
+import 'package:thanh_nien_da_nang/Screens/signupScreen.dart';
+import 'package:thanh_nien_da_nang/Elements/PopUpBox/dialogPopUp.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,43 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  //String _userName = '';
-  //String _userInfo = '';
-
-  // void _fetchUserInfo() async {
-  //   final String inputEmail = _emailController.text;
-  //   final int inputPassword = int.parse(_passwordController.text);
-  //
-  //   final response =
-  //       await http.get(Uri.parse("https://jsonplaceholder.typicode.com/users"));
-  //   final data = json.decode(response.body);
-  //
-  //   for (var user in data) {
-  //     if (user['email'] == inputEmail && user['id'] == inputPassword) {
-  //       setState(() {
-  //         _userInfo = "Name: ${user['name']}\n"
-  //             "Email: ${user['email']}\n"
-  //             "Username: ${user['username']}\n"
-  //             "Phone: ${user['phone']}\n"
-  //             "Website: ${user['website']}";
-  //         print(_userInfo);
-  //         showDialog(
-  //           context: context,
-  //           builder: (BuildContext context) {
-  //             return CustomAlertDialog(
-  //                 title: 'User found', content: _userInfo, btnText: 'Ok');
-  //           },
-  //         );
-  //       });
-  //       break;
-  //     } else {
-  //       setState(() {
-  //         _userInfo = 'User not found';
-  //       });
-  //     }
-  //   }
-  // }
+  bool _isLoading = false;
 
   void dispose() {
     _emailController.dispose();
@@ -64,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -83,8 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         colorBlendMode: BlendMode.overlay,
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
                         height: 250,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -92,17 +57,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             end: Alignment.centerLeft,
                             colors: [
                               Colors.transparent,
-                              Color(0xff0269E9).withOpacity(0.2),
-                              Color(0xff0269E9).withOpacity(0.5),
-                              Color(0xff0269E9).withOpacity(0.6),
-                              Color(0xff0269E9).withOpacity(0.8),
+                              const Color(0xff0269E9).withOpacity(0.2),
+                              const Color(0xff0269E9).withOpacity(0.5),
+                              const Color(0xff0269E9).withOpacity(0.6),
+                              const Color(0xff0269E9).withOpacity(0.8),
                             ],
                           ),
                         ),
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
                         height: 251,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -114,11 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               Colors.white.withOpacity(0.5),
                               Colors.white.withOpacity(0.6),
                               Colors.white.withOpacity(0.8),
-                              Color(0xffFFFFFF),
+                              const Color(0xffFFFFFF),
                             ],
                           ),
                         ),
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             'Đăng nhập tuổi trẻ Đà Nẵng',
@@ -130,8 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 50),
                         child: Image.asset(
                           'images/logodcs.png',
                           width: 70,
@@ -141,10 +106,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'Chưa có tài khoản?',
                           style: TextStyle(
                             color: Colors.black,
@@ -158,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(
                                 builder: (context) => SignUpScreen()),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Đăng ký ngay',
                             style: TextStyle(
                               fontSize: 16,
@@ -170,30 +135,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: BuildEmailBox(
                         controller: _emailController,
                         hinttext: 'Địa chỉ email'),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: BuildPasswordBox(controller: _passwordController),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextButton(
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ForgotPasswordScreen()),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Quên mật khẩu?',
                           style: TextStyle(
                             fontSize: 14,
@@ -204,49 +169,78 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: BuildLogSignInBtn(
-                      labeltext: 'Đăng nhập',
-                      callback: () async {
-                        final apiEndpoint = Uri.parse(
-                            'https://intern.try0.xyz/api/v1/account/user/login/');
-                        final response = await http.post(
-                          apiEndpoint,
-                          headers: {
-                            'Content-Type': 'application/json',
-                          },
-                          body: jsonEncode({
-                            'username': _emailController.text,
-                            'password': _passwordController.text,
-                            'type': 4,
-                          }),
-                        );
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: _isLoading
+                        ? const CircularProgressIndicator()
+                        : BuildLogSignInBtn(
+                            labeltext: 'Đăng nhập',
+                            callback: () async {
+                              setState(() {
+                                _isLoading = true;
+                              });
 
-                        if (response.statusCode == 200) {
-                          final Map<String, dynamic> responseData =
-                              json.decode(response.body);
-                          final String fullName =
-                              responseData['user']['full_name'];
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MainScrollPage(
-                                  userName: "Xin chào, $fullName",
-                                  isLoggedIn: true),
-                            ),
-                          );
-                        } else {
-                          print('Login failed: ${response.statusCode}');
-                        }
-                      },
-                    ),
+                              final apiEndpoint = Uri.parse(
+                                  'https://intern.try0.xyz/api/v1/account/user/login/');
+
+                              final response = await http.post(
+                                apiEndpoint,
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: jsonEncode({
+                                  'username': _emailController.text,
+                                  'password': _passwordController.text,
+                                  'type': 4,
+                                }),
+                              );
+
+                              if (response.statusCode == 200) {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                final Map<String, dynamic> responseData =
+                                    json.decode(response.body);
+                                final String fullName =
+                                    responseData['user']['full_name'];
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainScrollPage(
+                                        userName: "Xin chào, $fullName",
+                                        isLoggedIn: true),
+                                  ),
+                                );
+                              } else {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                                Map<String, dynamic> errorData =
+                                    jsonDecode(utf8.decode(response.bodyBytes));
+                                String errorMessage = errorData['detail'];
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CustomAlertDialog(
+                                      title: 'Đăng nhập không thành công',
+                                      callBack: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      content: errorMessage,
+                                      btnText: 'Quay lại',
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          ),
                   ),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   RichText(
                     textAlign: TextAlign.center,
-                    text: TextSpan(
+                    text: const TextSpan(
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xff8A8A8A),

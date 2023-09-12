@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/categorizedNews.dart';
-import 'package:thanh_nien_da_nang/highlightNews.dart';
-import 'package:thanh_nien_da_nang/latestNews.dart';
-import 'package:thanh_nien_da_nang/loginScreen.dart';
-import 'package:thanh_nien_da_nang/verticleTile.dart';
+import 'package:thanh_nien_da_nang/Campaigns/campaignBlankPage.dart';
+import 'package:thanh_nien_da_nang/Campaigns/CampaignGridPage.dart';
+import 'package:thanh_nien_da_nang/Campaigns/horizontalScrollSectionCampaign.dart';
+import 'package:thanh_nien_da_nang/Campaigns/fetchDataCampaign.dart';
+import 'package:thanh_nien_da_nang/Contests/fetchDataContest.dart';
+import 'package:thanh_nien_da_nang/News/highlightNews.dart';
+import 'package:thanh_nien_da_nang/Screens/loginScreen.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/verticleTile.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Contests/contestBlankPage.dart';
+import 'package:thanh_nien_da_nang/Contests/contestGridPage.dart';
+import 'package:thanh_nien_da_nang/News/fetchDataHighLightNews.dart';
+import 'package:thanh_nien_da_nang/News/fetchDataLatestNews.dart';
+import 'package:thanh_nien_da_nang/Contests/horizontalScrollSectionContest.dart';
+import 'package:thanh_nien_da_nang/News/latestNewsData.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;
@@ -17,125 +27,51 @@ class MainScrollPage extends StatefulWidget {
   State<MainScrollPage> createState() => _MainScrollPageState();
 }
 
-class CategorizedNewsData {
-  final String imagePath;
-  final String categoryimagePath;
-  final String category;
-  final String joined;
-  final String title;
-  final String date;
-  final String todate;
-  final String time;
-
-  CategorizedNewsData({
-    required this.imagePath,
-    required this.categoryimagePath,
-    required this.category,
-    required this.joined,
-    required this.title,
-    required this.date,
-    required this.todate,
-    required this.time,
-  });
-}
-
-class LatestNewsData {
-  final String imagePath;
-  final String title;
-  final String time;
-
-  LatestNewsData({
-    required this.imagePath,
-    required this.title,
-    required this.time,
-  });
-}
-
 class _MainScrollPageState extends State<MainScrollPage> {
-  List<CategorizedNewsData> categorizedNewsList = [
-    CategorizedNewsData(
-      imagePath: 'images/nguoigia1.png',
-      categoryimagePath: 'images/old-people1.png',
-      category: 'Giúp đỡ người già',
-      joined: '',
-      title: 'Giúp đỡ người cao tuổi khó khăn, đau yếu ở huyện Hòa Vang',
-      date: '15/07',
-      todate: '16/07',
-      time: '',
-    ),
-    CategorizedNewsData(
-      imagePath: 'images/hienmau1.png',
-      categoryimagePath: 'images/blood-donation1.png',
-      category: 'Hiến máu',
-      joined: '',
-      title: 'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
-      date: '03/07',
-      todate: '13/07',
-      time: '',
-    ),
-    CategorizedNewsData(
-      imagePath: 'images/login.png',
-      categoryimagePath: 'images/old-people1.png',
-      category: 'conmeo',
-      joined: '',
-      title: 'Ngày hội Chủ nhật Đỏ lần thứ XIV - năm 2023 tại Đà Nẵng',
-      date: '03/07',
-      todate: '13/07',
-      time: '',
-    ),
-  ];
-  List<CategorizedNewsData> contestsList = [
-    CategorizedNewsData(
-      imagePath: 'images/lephatdong.png',
-      categoryimagePath: 'images/users1.png',
-      category: '',
-      joined: '145',
-      title:
-          'Cuộc thi trực tuyến tìm hiểu nghị định đại hội toàn đoàn lần thứ XII',
-      date: '15/07',
-      todate: '16/07',
-      time: '30',
-    ),
-    CategorizedNewsData(
-      imagePath: 'images/seminar.png',
-      categoryimagePath: 'images/users1.png',
-      category: '',
-      joined: '80',
-      title: 'Sáng kiến thanh niên giải quyết vấn đề thúc đẩy bình đẳng giới',
-      date: '03/07',
-      todate: '13/07',
-      time: '15',
-    ),
-  ];
+  late Future<List<CategorizedNewsData>> contestsFuture;
+  late Future<List<LatestNewsData>> latestNewsFuture;
+  final campaignsDataFuture = ApiService.fetchAllCampaigns();
+  final newsDataContest = ApiServiceContest.fetchAllContests();
 
-  List<LatestNewsData> latestNewsList = [
-    LatestNewsData(
-      imagePath: 'images/run1.png',
-      title: 'Đà Nẵng: Phát triển phong trào chạy bộ trong toàn dân',
-      time: '12 phút trước',
-    ),
-    LatestNewsData(
-      imagePath: 'images/run2.png',
-      title:
-          'Cuộc thi trực tuyến tìm hiểu nghị định đại hội toàn đoàn lần thứ XII',
-      time: '2 giờ trước',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    fetchHighLightNews().then(
+      (newsData) {
+        setState(() {
+          highLightNewsList = newsData;
+        });
+      },
+    );
 
-  List<Widget> buildVerticalTiles(List<CategorizedNewsData> dataList) {
-    return dataList.map((data) {
-      return VerticleTile(
-        title: data.title,
-        imagePath: data.imagePath,
-        time: data.time,
-      );
-    }).toList();
+    fetchLatestNews().then(
+      (newsData) {
+        setState(() {
+          latestNewsList = newsData;
+        });
+      },
+    );
+  }
+
+  List<LatestNewsData> latestNewsList = [];
+  List<LatestNewsData> highLightNewsList = [];
+
+  List<Widget> buildVerticalTiles(List<LatestNewsData> dataList) {
+    return dataList.map(
+      (data) {
+        return VerticleTile(
+          title: data.title,
+          imagePath: data.imagePath,
+          time: data.time,
+        );
+      },
+    ).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -153,8 +89,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       colorBlendMode: BlendMode.overlay,
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
                       height: 250,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -162,19 +98,19 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           end: Alignment.centerLeft,
                           colors: [
                             Colors.transparent,
-                            Color(0xff0269E9).withOpacity(0.2),
-                            Color(0xff0269E9).withOpacity(0.5),
-                            Color(0xff0269E9).withOpacity(0.6),
-                            Color(0xff0269E9).withOpacity(0.8),
+                            const Color(0xff0269E9).withOpacity(0.2),
+                            const Color(0xff0269E9).withOpacity(0.5),
+                            const Color(0xff0269E9).withOpacity(0.6),
+                            const Color(0xff0269E9).withOpacity(0.8),
                           ],
                         ),
                       ),
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 32),
+                        padding: const EdgeInsets.symmetric(vertical: 32),
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: ListTile(
-                            title: Text(
+                            title: const Text(
                               'Tuổi trẻ Đà Nẵng',
                               style: TextStyle(
                                   fontSize: 18,
@@ -203,17 +139,17 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text(
+                                        const Text(
                                           '\nĐăng nhập',
                                           style: TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.w600,
                                               color: Colors.white),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Column(
                                           children: [
-                                            SizedBox(height: 23),
+                                            const SizedBox(height: 23),
                                             Image.asset(
                                               'images/arrow-circle-right1.png',
                                               width: 22,
@@ -229,8 +165,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 50),
                       child: Image.asset(
                         'images/logodcs.png',
                         width: 70,
@@ -238,8 +174,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       ),
                     ),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 50),
                       child: Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
@@ -253,26 +189,26 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       height: 350,
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           height: 138,
                           decoration: BoxDecoration(
-                            color: Color(0xffFFFFFF),
+                            color: const Color(0xffFFFFFF),
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.2),
                                 spreadRadius: 3,
                                 blurRadius: 10,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
                           child: Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -283,8 +219,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color(0xffF0F6FD).withOpacity(0.9),
+                                        color: const Color(0xffF0F6FD)
+                                            .withOpacity(0.9),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
@@ -293,8 +229,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                             'images/homescroll1.png'),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
-                                    Text(
+                                    const SizedBox(height: 5),
+                                    const Text(
                                       'Tình nguyện',
                                       style: TextStyle(
                                         fontSize: 13,
@@ -304,15 +240,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Column(
                                   children: [
                                     Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color(0xffF0F6FD).withOpacity(0.9),
+                                        color: const Color(0xffF0F6FD)
+                                            .withOpacity(0.9),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
@@ -321,8 +257,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                             'images/homescroll2.png'),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
-                                    Text(
+                                    const SizedBox(height: 5),
+                                    const Text(
                                       'Cuộc thi',
                                       style: TextStyle(
                                         fontSize: 13,
@@ -332,15 +268,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Column(
                                   children: [
                                     Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color(0xffF0F6FD).withOpacity(0.9),
+                                        color: const Color(0xffF0F6FD)
+                                            .withOpacity(0.9),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
@@ -349,8 +285,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                             'images/homescroll3.png'),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
-                                    Text(
+                                    const SizedBox(height: 5),
+                                    const Text(
                                       'Tin tức',
                                       style: TextStyle(
                                         fontSize: 13,
@@ -360,15 +296,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Column(
                                   children: [
                                     Container(
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color(0xffF0F6FD).withOpacity(0.9),
+                                        color: const Color(0xffF0F6FD)
+                                            .withOpacity(0.9),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
@@ -377,8 +313,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                             'images/homescroll4.png'),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
-                                    Text(
+                                    const SizedBox(height: 5),
+                                    const Text(
                                       'Cá nhân',
                                       style: TextStyle(
                                         fontSize: 13,
@@ -388,7 +324,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                               ],
                             ),
                           ),
@@ -397,23 +333,37 @@ class _MainScrollPageState extends State<MainScrollPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                Container(
-                  child: HighLightNews(
-                      imagePath: 'images/highlight1.png',
-                      articleName:
-                          'Tuổi trẻ Đà Nẵng sôi nổi cùng các hoạt động hỗ trợ “Tiếp sức mùa thi 2023”'),
+                const SizedBox(height: 20),
+                HighLightNews(
+                  highlightNewsList: highLightNewsList,
+                  callBack: () {
+                    print('conmeo');
+                  },
                 ),
-                SizedBox(height: 25),
+
+                const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CampaignGridPage(
+                              fetchData1: () =>
+                                  ApiService.fetchOngoingCampaigns(),
+                              fetchData2: () =>
+                                  ApiService.fetchComingSoonCampaigns(),
+                              fetchData3: () =>
+                                  ApiService.fetchFinishedCampaigns(),
+                              blankPage: const CampaignBlankPage(),
+                            ),
+                          ),
+                        ),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Đợt tình nguyện',
                               style: TextStyle(
                                 fontSize: 18,
@@ -421,15 +371,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Container(
                               width: 30,
                               height: 30,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0xffF5F5F5),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.arrow_forward,
                                   color: Color(0xff8A8A8A),
@@ -443,36 +393,33 @@ class _MainScrollPageState extends State<MainScrollPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categorizedNewsList.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          CategorizedNews(
-                            index: index,
-                            newsDataList: categorizedNewsList,
-                          ),
-                          SizedBox(width: 10),
-                        ],
-                      );
-                    },
-                  ),
+                const SizedBox(height: 15),
+                HorizontalScrollSectionCampaign(
+                  fetchData: () => campaignsDataFuture,
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ContestGridPage(
+                              fetchData1: () =>
+                                  ApiServiceContest.fetchOngoingContests(),
+                              fetchData2: () =>
+                                  ApiServiceContest.fetchComingSoonContests(),
+                              fetchData3: () =>
+                                  ApiServiceContest.fetchFinishedContests(),
+                              blankPage: const ContestBlankPage(),
+                            ),
+                          ),
+                        ),
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Cuộc thi đang diễn ra',
                               style: TextStyle(
                                 fontSize: 18,
@@ -480,15 +427,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Container(
                               width: 30,
                               height: 30,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0xffF5F5F5),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.arrow_forward,
                                   color: Color(0xff8A8A8A),
@@ -502,36 +449,122 @@ class _MainScrollPageState extends State<MainScrollPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: contestsList.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          CategorizedNews(
-                            index: index,
-                            newsDataList: contestsList,
-                          ),
-                          SizedBox(width: 10),
-                        ],
-                      );
-                    },
+                const SizedBox(height: 15),
+                HorizontalScrollSectionContest(
+                  fetchData: () => newsDataContest,
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color(0xffE3E3E3),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Stack(
+                      children: [
+                        Row(
+                          children: [
+                            Image.asset('images/facebook.png'),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Tham gia fanpage Tuổi trẻ Đà Nẵng',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    'Nơi cung cấp, định hướng thông tin, nắm bắt tình hình cơ sở.',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Row(
+                                      children: [
+                                        const Text(
+                                          'Tham gia ngay',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xff0269E9),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Center(
+                                          child: Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xffE8F2FF),
+                                            ),
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.arrow_forward,
+                                                color: Color(0xff0269E9),
+                                                size: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            Column(
+                              children: [
+                                const SizedBox(height: 70),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Image.asset('images/Vectorlike.png'),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                const SizedBox(height: 90),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Image.asset('images/Vectorheart.png'),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
                     children: [
                       TextButton(
                         onPressed: () {},
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'Tin tức mới',
                               style: TextStyle(
                                 fontSize: 18,
@@ -539,15 +572,15 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                 color: Colors.black,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Container(
                               width: 30,
                               height: 30,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0xffF5F5F5),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.arrow_forward,
                                   color: Color(0xff8A8A8A),
@@ -561,29 +594,13 @@ class _MainScrollPageState extends State<MainScrollPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
-                    children: latestNewsList.asMap().entries.map((entry) {
-                      final index = entry.key;
-                      //final newsData = entry.value;
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: LatestNews(
-                          index: index,
-                          newsDataList: latestNewsList,
-                        ),
-                      );
-                    }).toList(),
+                    children: buildVerticalTiles(latestNewsList),
                   ),
                 ),
-                // Container(
-                //   padding: EdgeInsets.symmetric(horizontal: 20),
-                //   child: Column(
-                //     children: buildVerticalTiles(latestNewsList),
-                //   ),
-                // ),
                 Stack(
                   children: [
                     Container(
@@ -591,7 +608,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       child: Center(
                         child: RichText(
                           textAlign: TextAlign.center,
-                          text: TextSpan(
+                          text: const TextSpan(
                             style: TextStyle(
                               fontSize: 13,
                               color: Color(0xff8A8A8A),
@@ -624,11 +641,9 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       bottom: 0,
                       left: 0,
                       right: 0,
-                      child: Container(
-                        child: Image.asset(
-                          'images/footer.png',
-                          fit: BoxFit.fitWidth,
-                        ),
+                      child: Image.asset(
+                        'images/footer.png',
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ],

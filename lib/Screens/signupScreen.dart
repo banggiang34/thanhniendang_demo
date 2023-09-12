@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/buildemailBox.dart';
-import 'package:thanh_nien_da_nang/buildfillBox.dart';
-import 'package:thanh_nien_da_nang/buildlogsigninBtn.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildemailBox.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildfillBox.dart';
+import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
 import 'package:http/http.dart' as http;
-import 'package:thanh_nien_da_nang/dialogPopUp.dart';
+import 'package:thanh_nien_da_nang/Elements/PopUpBox/dialogPopUp.dart';
 
-import 'buildconfirmpassBox.dart';
+import '../Elements/TextBox/buildconfirmpassBox.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -20,6 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+  bool _isLoading = false;
 
   Future<void> _registerUser() async {
     final apiUrl =
@@ -35,6 +36,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final response = await http.post(apiUrl,
         body: body, headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
+      setState(() {
+        _isLoading = false;
+      });
       print('con meo thanh cong');
       showDialog(
           context: context,
@@ -47,17 +51,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           });
     } else {
+      setState(() {
+        _isLoading = false;
+      });
       print('that bai con meo');
       print(response.body);
-      print(_phoneNumberController.text);
+      final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+      final errorMessage = responseBody['detail'] ?? 'An error occurred';
       showDialog(
           context: context,
           builder: (BuildContext context) {
             return CustomAlertDialog(
-              title: 'conmeo',
-              callBack: () {},
-              content: 'An error occurred: ${response.body}',
-              btnText: 'conmeook',
+              title: 'Đăng ký không thành công',
+              callBack: () {
+                Navigator.of(context).pop();
+              },
+              content: errorMessage,
+              btnText: 'Quay lại',
             );
           });
     }
@@ -69,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Đăng ký tài khoản',
           style: TextStyle(
             fontSize: 17,
@@ -77,12 +87,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
             color: Color(0xff1F1F1F),
           ),
         ),
-        backgroundColor: Color(0xffFFFFFF),
+        backgroundColor: const Color(0xffFFFFFF),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
       ),
@@ -90,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 25,
               vertical: 30,
             ),
@@ -99,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Nhập thông tin để đăng ký tài khoản',
                     style: TextStyle(
                       fontSize: 16,
@@ -107,25 +117,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: Color(0xff484848),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   BuildFillBox(
                       hinttext: 'Họ tên', controller: _fullNameController),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   BuildEmailBox(
                       controller: _emailController, hinttext: 'Địa chỉ email'),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   BuildFillBox(
                       hinttext: 'Số điện thoại',
                       controller: _phoneNumberController),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   BuildConfirmPasswordBox(controller: _passwordController),
-                  SizedBox(height: 20),
-                  BuildLogSignInBtn(
-                    labeltext: 'Đăng ký',
-                    callback: () {
-                      _registerUser();
-                    },
-                  )
+                  const SizedBox(height: 20),
+                  _isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : BuildLogSignInBtn(
+                          labeltext: 'Đăng ký',
+                          callback: () {
+                            _registerUser();
+                            setState(() {
+                              _isLoading = true;
+                            });
+                          },
+                        )
                 ],
               ),
             ),

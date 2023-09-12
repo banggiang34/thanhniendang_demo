@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thanh_nien_da_nang/mainscrollPage.dart';
+import 'package:thanh_nien_da_nang/Screens/mainscrollPage.dart';
 
 void main() {
   runApp(MyApp());

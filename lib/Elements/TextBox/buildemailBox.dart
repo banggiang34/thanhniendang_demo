@@ -21,20 +21,20 @@ class _BuildEmailBoxState extends State<BuildEmailBox> {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xffDDDDDD).withOpacity(0.2),
+            color: const Color(0xffDDDDDD).withOpacity(0.2),
             width: 2,
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Color(0xff0269E9),
             width: 2,
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         hintText: widget.hinttext,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Color(0xffA3A3A3),
           fontSize: 17,
           fontWeight: FontWeight.w400,
