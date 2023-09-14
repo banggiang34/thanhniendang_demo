@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:thanh_nien_da_nang/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
 
 class fetchDataDetailContest {
   static Future<ContestDetailData> fetchDataById(int id) async {
@@ -14,7 +14,6 @@ class fetchDataDetailContest {
       if (response.statusCode == 200) {
         final data = jsonDecode(utf8.decode(response.bodyBytes));
 
-        // Check for null values and parse data
         String imagePath = data['cover_image'] ?? '';
         String unit = data['organizational_unit'] ?? '';
         String content = data['description'] ?? '';

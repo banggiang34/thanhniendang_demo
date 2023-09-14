@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../Elements/Tiles/categorizedNewsData.dart';
-import 'package:thanh_nien_da_nang/Contests/contestDetailData.dart';
-import 'package:thanh_nien_da_nang/Contests/detailContestPage.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'package:thanh_nien_da_nang/Contests/fetchDataDetailContest.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataDetailContest.dart';
 
 class HorizontalScrollSectionContest extends StatefulWidget {
   final Future<List<CategorizedNewsData>> Function() fetchData;

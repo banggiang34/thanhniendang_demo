@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:thanh_nien_da_nang/News/latestNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/detailNewsPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataDetailNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/latestNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
 
 class HighLightNews extends StatefulWidget {
   final List<LatestNewsData> highlightNewsList;
-  final Function callBack;
 
   HighLightNews({
     required this.highlightNewsList,
-    required this.callBack,
   });
 
   @override
@@ -21,6 +22,11 @@ class _HighLightNewsState extends State<HighLightNews> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<NewsDetailData> fetchNewsData(int id) async {
+    final newsData = await fetchDataDetailNews.fetchDataById(id);
+    return newsData;
   }
 
   @override
@@ -53,7 +59,20 @@ class _HighLightNewsState extends State<HighLightNews> {
                     builder: (BuildContext context) {
                       return GestureDetector(
                         onTap: () {
-                          widget.callBack();
+                          int id = newsItem.id;
+                          fetchDataDetailNews
+                              .fetchDataById(id)
+                              .then((newsData) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailNewsPage(
+                                  id: id,
+                                  newsData: newsData,
+                                ),
+                              ),
+                            );
+                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),

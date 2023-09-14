@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Campaigns/detailCampaignPage.dart';
-import 'package:thanh_nien_da_nang/Campaigns/fetchDataDetailCampaign.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
-import 'package:thanh_nien_da_nang/Campaigns/campaignDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataDetailContest.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
 
-class CampaignGridPage extends StatefulWidget {
-  final Future<List<CategorizedNewsData>> Function() fetchData1;
-  final Future<List<CategorizedNewsData>> Function() fetchData2;
-  final Future<List<CategorizedNewsData>> Function() fetchData3;
+class ContestGridPage extends StatefulWidget {
+  final Future<List<CategorizedNewsData>> Function() fetchDataOnGoing;
+  final Future<List<CategorizedNewsData>> Function() fetchDataComingSoon;
+  final Future<List<CategorizedNewsData>> Function() fetchDataFinished;
   final Widget blankPage;
 
-  const CampaignGridPage(
+  const ContestGridPage(
       {Key? key,
-      required this.fetchData1,
-      required this.fetchData2,
-      required this.fetchData3,
+      required this.fetchDataOnGoing,
+      required this.fetchDataComingSoon,
+      required this.fetchDataFinished,
       required this.blankPage});
 
   @override
-  State<CampaignGridPage> createState() => _CampaignGridPageState();
+  State<ContestGridPage> createState() => _ContestGridPageState();
 }
 
-class _CampaignGridPageState extends State<CampaignGridPage> {
+class _ContestGridPageState extends State<ContestGridPage> {
   PageController _pageController = PageController();
   int _currentPage = 0;
 
-  late Future<List<CampaignDetailData>> campaignDetailFuture;
+  late Future<List<ContestDetailData>> contestDetailFuture;
 
   List<CategorizedNewsData>? data1;
   List<CategorizedNewsData>? data2;
@@ -50,9 +50,9 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
     fetchData(1);
   }
 
-  Future<CampaignDetailData> fetchCampaignData(int id) async {
-    final campaignData = await fetchDataDetailCampaign.fetchDataById(id);
-    return campaignData;
+  Future<ContestDetailData> fetchContestData(int id) async {
+    final contestData = await fetchDataDetailContest.fetchDataById(id);
+    return contestData;
   }
 
   Future<void> fetchData(int index) async {
@@ -73,13 +73,13 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
     List<CategorizedNewsData>? data;
     switch (index) {
       case 1:
-        data = await widget.fetchData1();
+        data = await widget.fetchDataOnGoing();
         break;
       case 2:
-        data = await widget.fetchData2();
+        data = await widget.fetchDataComingSoon();
         break;
       case 3:
-        data = await widget.fetchData3();
+        data = await widget.fetchDataFinished();
         break;
     }
 
@@ -108,7 +108,7 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
         elevation: 0,
         centerTitle: true,
         title: const Text(
-          'Đợt tình nguyện',
+          'Cuộc thi',
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w700,
@@ -175,32 +175,31 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                 ),
                                                 itemCount: data1?.length ?? 0,
                                                 itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      data1![index];
+                                                  final contest = data1![index];
                                                   return HorizontalTile(
-                                                    id: campaign.id,
+                                                    id: contest.id,
                                                     imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
+                                                        contest.imagePath,
+                                                    categoryimagePath: contest
                                                         .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
+                                                    category: contest.category,
+                                                    title: contest.title,
+                                                    date: contest.date,
+                                                    todate: contest.todate,
+                                                    time: contest.time,
+                                                    joined: contest.joined,
                                                     callBack: () {
                                                       int id = data1![index].id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
+                                                      fetchContestData(id)
+                                                          .then((contestData) {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                DetailCampaignPage(
+                                                                DetailContestPage(
                                                               id: id,
-                                                              campaignData:
-                                                                  campaignData,
+                                                              contestData:
+                                                                  contestData,
                                                             ),
                                                           ),
                                                         );
@@ -267,16 +266,16 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                     joined: campaign.joined,
                                                     callBack: () {
                                                       int id = data2![index].id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
+                                                      fetchContestData(id)
+                                                          .then((contestData) {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                DetailCampaignPage(
+                                                                DetailContestPage(
                                                               id: id,
-                                                              campaignData:
-                                                                  campaignData,
+                                                              contestData:
+                                                                  contestData,
                                                             ),
                                                           ),
                                                         );
@@ -327,32 +326,31 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                 ),
                                                 itemCount: data3?.length ?? 0,
                                                 itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      data3![index];
+                                                  final contest = data3![index];
                                                   return HorizontalTile(
-                                                    id: campaign.id,
+                                                    id: contest.id,
                                                     imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
+                                                        contest.imagePath,
+                                                    categoryimagePath: contest
                                                         .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
+                                                    category: contest.category,
+                                                    title: contest.title,
+                                                    date: contest.date,
+                                                    todate: contest.todate,
+                                                    time: contest.time,
+                                                    joined: contest.joined,
                                                     callBack: () {
                                                       int id = data3![index].id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
+                                                      fetchContestData(id)
+                                                          .then((contestData) {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                DetailCampaignPage(
+                                                                DetailContestPage(
                                                               id: id,
-                                                              campaignData:
-                                                                  campaignData,
+                                                              contestData:
+                                                                  contestData,
                                                             ),
                                                           ),
                                                         );

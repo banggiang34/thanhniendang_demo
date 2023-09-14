@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/TextBox/buildemailBox.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
 import 'package:thanh_nien_da_nang/Elements/TextBox/buildpasswordBox.dart';
-import 'package:thanh_nien_da_nang/Screens/forgotpasswordScreen.dart';
-import 'package:thanh_nien_da_nang/Screens/mainscrollPage.dart';
-import 'package:thanh_nien_da_nang/Screens/signupScreen.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/forgotpasswordScreen.dart';
+import 'package:thanh_nien_da_nang/Presentation//Screens/mainscrollPage.dart';
+import 'package:thanh_nien_da_nang/Presentation//Screens/signupScreen.dart';
 import 'package:thanh_nien_da_nang/Elements/PopUpBox/dialogPopUp.dart';
 
 class LoginScreen extends StatefulWidget {

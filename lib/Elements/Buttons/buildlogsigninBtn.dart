@@ -11,7 +11,6 @@ class BuildLogSignInBtn extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () => callback(),
-        child: Text(labeltext),
         style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
             shape:
@@ -23,6 +22,7 @@ class BuildLogSignInBtn extends StatelessWidget {
             primary: const Color(0xff0269E9),
             onPrimary: Colors.white,
             elevation: 0),
+        child: Text(labeltext),
       ),
     );
   }

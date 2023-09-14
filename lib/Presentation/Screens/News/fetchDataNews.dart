@@ -1,5 +1,5 @@
 import 'dart:convert';
-import '../Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 

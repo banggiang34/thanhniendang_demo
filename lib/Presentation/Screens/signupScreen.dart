@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
 import 'package:http/http.dart' as http;
 import 'package:thanh_nien_da_nang/Elements/PopUpBox/dialogPopUp.dart';
 
-import '../Elements/TextBox/buildconfirmpassBox.dart';
+import 'package:thanh_nien_da_nang/Elements/TextBox/buildconfirmpassBox.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

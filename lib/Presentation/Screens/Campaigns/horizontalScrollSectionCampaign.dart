@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'campaignDetailData.dart';
-import '../Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
 import 'detailCampaignPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'fetchDataDetailCampaign.dart';

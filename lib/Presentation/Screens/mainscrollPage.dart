@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Campaigns/campaignBlankPage.dart';
-import 'package:thanh_nien_da_nang/Campaigns/CampaignGridPage.dart';
-import 'package:thanh_nien_da_nang/Campaigns/horizontalScrollSectionCampaign.dart';
-import 'package:thanh_nien_da_nang/Campaigns/fetchDataCampaign.dart';
-import 'package:thanh_nien_da_nang/Contests/fetchDataContest.dart';
-import 'package:thanh_nien_da_nang/News/highlightNews.dart';
-import 'package:thanh_nien_da_nang/Screens/loginScreen.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignBlankPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignGridPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/horizontalScrollSectionCampaign.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataCampaign.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContest.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/verticleTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
-import 'package:thanh_nien_da_nang/Contests/contestBlankPage.dart';
-import 'package:thanh_nien_da_nang/Contests/contestGridPage.dart';
-import 'package:thanh_nien_da_nang/News/fetchDataHighLightNews.dart';
-import 'package:thanh_nien_da_nang/News/fetchDataLatestNews.dart';
-import 'package:thanh_nien_da_nang/Contests/horizontalScrollSectionContest.dart';
-import 'package:thanh_nien_da_nang/News/latestNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestGridPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataLatestNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/horizontalScrollSectionContest.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/latestNewsData.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;
@@ -336,9 +336,6 @@ class _MainScrollPageState extends State<MainScrollPage> {
                 const SizedBox(height: 20),
                 HighLightNews(
                   highlightNewsList: highLightNewsList,
-                  callBack: () {
-                    print('conmeo');
-                  },
                 ),
 
                 const SizedBox(height: 10),
@@ -351,11 +348,11 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => CampaignGridPage(
-                              fetchData1: () =>
+                              fetchDataOnGoing: () =>
                                   ApiService.fetchOngoingCampaigns(),
-                              fetchData2: () =>
+                              fetchDataComingSoon: () =>
                                   ApiService.fetchComingSoonCampaigns(),
-                              fetchData3: () =>
+                              fetchDataFinished: () =>
                                   ApiService.fetchFinishedCampaigns(),
                               blankPage: const CampaignBlankPage(),
                             ),
@@ -407,11 +404,11 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => ContestGridPage(
-                              fetchData1: () =>
+                              fetchDataOnGoing: () =>
                                   ApiServiceContest.fetchOngoingContests(),
-                              fetchData2: () =>
+                              fetchDataComingSoon: () =>
                                   ApiServiceContest.fetchComingSoonContests(),
-                              fetchData3: () =>
+                              fetchDataFinished: () =>
                                   ApiServiceContest.fetchFinishedContests(),
                               blankPage: const ContestBlankPage(),
                             ),
