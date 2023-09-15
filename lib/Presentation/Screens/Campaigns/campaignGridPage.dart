@@ -4,13 +4,13 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/detailCampaign
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataDetailCampaign.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignDetailData.dart';
 
 class CampaignGridPage extends StatefulWidget {
-  final Future<List<CategorizedNewsData>> Function() fetchDataOnGoing;
-  final Future<List<CategorizedNewsData>> Function() fetchDataComingSoon;
-  final Future<List<CategorizedNewsData>> Function() fetchDataFinished;
+  final Future<List<CategorizedTilesData>> Function() fetchDataOnGoing;
+  final Future<List<CategorizedTilesData>> Function() fetchDataComingSoon;
+  final Future<List<CategorizedTilesData>> Function() fetchDataFinished;
   final Widget blankPage;
 
   const CampaignGridPage(
@@ -30,12 +30,12 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
 
   late Future<List<CampaignDetailData>> campaignDetailFuture;
 
-  List<CategorizedNewsData>? data1;
-  List<CategorizedNewsData>? data2;
-  List<CategorizedNewsData>? data3;
-  bool isLoading1 = true;
-  bool isLoading2 = true;
-  bool isLoading3 = true;
+  List<CategorizedTilesData>? dataOnGoing;
+  List<CategorizedTilesData>? dataComingSoon;
+  List<CategorizedTilesData>? dataFinished;
+  bool isLoadingOnGoing = true;
+  bool isLoadingComingSoon = true;
+  bool isLoadingFinished = true;
 
   @override
   void initState() {
@@ -59,18 +59,18 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
     setState(() {
       switch (index) {
         case 1:
-          isLoading1 = true;
+          isLoadingOnGoing = true;
           break;
         case 2:
-          isLoading2 = true;
+          isLoadingComingSoon = true;
           break;
         case 3:
-          isLoading3 = true;
+          isLoadingFinished = true;
           break;
       }
     });
 
-    List<CategorizedNewsData>? data;
+    List<CategorizedTilesData>? data;
     switch (index) {
       case 1:
         data = await widget.fetchDataOnGoing();
@@ -86,16 +86,16 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
     setState(() {
       switch (index) {
         case 1:
-          isLoading1 = false;
-          data1 = data;
+          isLoadingOnGoing = false;
+          dataOnGoing = data;
           break;
         case 2:
-          isLoading2 = false;
-          data2 = data;
+          isLoadingComingSoon = false;
+          dataComingSoon = data;
           break;
         case 3:
-          isLoading3 = false;
-          data3 = data;
+          isLoadingFinished = false;
+          dataFinished = data;
           break;
       }
     });
@@ -155,9 +155,10 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading1
+                              child: isLoadingOnGoing
                                   ? const CircularProgressIndicator()
-                                  : (data1 == null || data1!.isEmpty)
+                                  : (dataOnGoing == null ||
+                                          dataOnGoing!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -173,10 +174,11 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data1?.length ?? 0,
+                                                itemCount:
+                                                    dataOnGoing?.length ?? 0,
                                                 itemBuilder: (context, index) {
                                                   final campaign =
-                                                      data1![index];
+                                                      dataOnGoing![index];
                                                   return HorizontalTile(
                                                     id: campaign.id,
                                                     imagePath:
@@ -190,7 +192,9 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                     time: campaign.time,
                                                     joined: campaign.joined,
                                                     callBack: () {
-                                                      int id = data1![index].id;
+                                                      int id =
+                                                          dataOnGoing![index]
+                                                              .id;
                                                       fetchCampaignData(id)
                                                           .then((campaignData) {
                                                         Navigator.push(
@@ -231,9 +235,10 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading2
+                              child: isLoadingComingSoon
                                   ? const CircularProgressIndicator()
-                                  : (data2 == null || data2!.isEmpty)
+                                  : (dataComingSoon == null ||
+                                          dataComingSoon!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -249,10 +254,11 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data2?.length ?? 0,
+                                                itemCount:
+                                                    dataComingSoon?.length ?? 0,
                                                 itemBuilder: (context, index) {
                                                   final campaign =
-                                                      data2![index];
+                                                      dataComingSoon![index];
                                                   return HorizontalTile(
                                                     id: campaign.id,
                                                     imagePath:
@@ -266,7 +272,9 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                     time: campaign.time,
                                                     joined: campaign.joined,
                                                     callBack: () {
-                                                      int id = data2![index].id;
+                                                      int id =
+                                                          dataComingSoon![index]
+                                                              .id;
                                                       fetchCampaignData(id)
                                                           .then((campaignData) {
                                                         Navigator.push(
@@ -307,9 +315,10 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading3
+                              child: isLoadingFinished
                                   ? const CircularProgressIndicator()
-                                  : (data3 == null || data3!.isEmpty)
+                                  : (dataFinished == null ||
+                                          dataFinished!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -325,10 +334,11 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data3?.length ?? 0,
+                                                itemCount:
+                                                    dataFinished?.length ?? 0,
                                                 itemBuilder: (context, index) {
                                                   final campaign =
-                                                      data3![index];
+                                                      dataFinished![index];
                                                   return HorizontalTile(
                                                     id: campaign.id,
                                                     imagePath:
@@ -342,7 +352,9 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                                     time: campaign.time,
                                                     joined: campaign.joined,
                                                     callBack: () {
-                                                      int id = data3![index].id;
+                                                      int id =
+                                                          dataFinished![index]
+                                                              .id;
                                                       fetchCampaignData(id)
                                                           .then((campaignData) {
                                                         Navigator.push(

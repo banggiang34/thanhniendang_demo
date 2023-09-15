@@ -11,6 +11,8 @@ class CampaignDetailData {
   final String content;
   final String phone;
   final String email;
+  final String status;
+  final List<String> imagesUrls;
   final int id;
 
   const CampaignDetailData({
@@ -26,6 +28,8 @@ class CampaignDetailData {
     required this.content,
     required this.phone,
     required this.email,
+    required this.status,
+    required this.imagesUrls,
     required this.id,
   });
 }

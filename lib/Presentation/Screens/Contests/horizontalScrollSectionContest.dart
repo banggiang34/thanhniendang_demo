@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataDetailContest.dart';
 
 class HorizontalScrollSectionContest extends StatefulWidget {
-  final Future<List<CategorizedNewsData>> Function() fetchData;
+  final Future<List<CategorizedTilesData>> Function() fetchData;
 
   HorizontalScrollSectionContest({required this.fetchData});
 
@@ -17,7 +17,7 @@ class HorizontalScrollSectionContest extends StatefulWidget {
 
 class _HorizontalScrollSectionContestState
     extends State<HorizontalScrollSectionContest> {
-  List<CategorizedNewsData> newsDataList = [];
+  List<CategorizedTilesData> newsDataList = [];
   bool isLoading = true;
 
   @override
@@ -28,7 +28,7 @@ class _HorizontalScrollSectionContestState
 
   Future<void> fetchDataAndUpdateUI() async {
     try {
-      List<CategorizedNewsData> data = await widget.fetchData();
+      List<CategorizedTilesData> data = await widget.fetchData();
       setState(() {
         newsDataList = data;
         isLoading = false;
@@ -57,7 +57,7 @@ class _HorizontalScrollSectionContestState
               scrollDirection: Axis.horizontal,
               itemCount: newsDataList.length,
               itemBuilder: (context, index) {
-                CategorizedNewsData newsData = newsDataList[index];
+                CategorizedTilesData newsData = newsDataList[index];
                 return HorizontalTile(
                   id: newsData.id,
                   imagePath: newsData.imagePath,

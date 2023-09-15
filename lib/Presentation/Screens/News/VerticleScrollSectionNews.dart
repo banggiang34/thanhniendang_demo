@@ -7,7 +7,7 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataDetailNews
 class VerticalScrollSectionNews extends StatefulWidget {
   final List<NewsTilesData> newsDataList;
 
-  VerticalScrollSectionNews({Key? key, required this.newsDataList})
+  const VerticalScrollSectionNews({Key? key, required this.newsDataList})
       : super(key: key);
 
   @override

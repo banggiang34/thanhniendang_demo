@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,7 +10,7 @@ class CategoryObject {
   CategoryObject(this.value, this.label);
 }
 
-Future<List<CategorizedNewsData>> fetchCategorizedNews() async {
+Future<List<CategorizedTilesData>> fetchCategorizedNews() async {
   final response = await http
       .get(Uri.parse('https://intern.try0.xyz/api/v1/article/news/?category/'));
 
@@ -44,7 +44,7 @@ Future<List<CategorizedNewsData>> fetchCategorizedNews() async {
       DateTime timeTime = DateTime.parse(item['updated_at']);
       String parsedTime = DateFormat.Hm().format(timeTime);
 
-      return CategorizedNewsData(
+      return CategorizedTilesData(
         imagePath: item['cover_image'],
         categoryimagePath: '',
         category: newsItemCategories.join(', '),

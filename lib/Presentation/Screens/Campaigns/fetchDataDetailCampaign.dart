@@ -26,6 +26,16 @@ class fetchDataDetailCampaign {
         DateTime postedDate = DateTime.parse(data['created_at']);
         String parsedpostedDate = DateFormat('dd/MM/yyyy').format(postedDate);
 
+        List<String> imagesUrls = [];
+
+        if (data['images'] != null) {
+          for (var imageUrlData in data['images']) {
+            if (imageUrlData['url'] != null) {
+              imagesUrls.add(imageUrlData['url'].toString());
+            }
+          }
+        }
+
         return CampaignDetailData(
           imagePath: data['cover_image'],
           category: data['type_obj']['label'],
@@ -41,6 +51,8 @@ class fetchDataDetailCampaign {
           content: data['content'],
           phone: data['contact_mobile'],
           email: data['contact_email'],
+          status: data['status_obj']['label'],
+          imagesUrls: imagesUrls,
           id: data['id'],
         );
       } else {

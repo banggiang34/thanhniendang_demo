@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataDetailContest.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
 
 class ContestGridPage extends StatefulWidget {
-  final Future<List<CategorizedNewsData>> Function() fetchDataOnGoing;
-  final Future<List<CategorizedNewsData>> Function() fetchDataComingSoon;
-  final Future<List<CategorizedNewsData>> Function() fetchDataFinished;
+  final Future<List<CategorizedTilesData>> Function() fetchDataOnGoing;
+  final Future<List<CategorizedTilesData>> Function() fetchDataComingSoon;
+  final Future<List<CategorizedTilesData>> Function() fetchDataFinished;
   final Widget blankPage;
 
   const ContestGridPage(
@@ -30,12 +30,12 @@ class _ContestGridPageState extends State<ContestGridPage> {
 
   late Future<List<ContestDetailData>> contestDetailFuture;
 
-  List<CategorizedNewsData>? data1;
-  List<CategorizedNewsData>? data2;
-  List<CategorizedNewsData>? data3;
-  bool isLoading1 = true;
-  bool isLoading2 = true;
-  bool isLoading3 = true;
+  List<CategorizedTilesData>? dataOnGoing;
+  List<CategorizedTilesData>? dataComingSoon;
+  List<CategorizedTilesData>? dataFinished;
+  bool isLoadingOnGoing = true;
+  bool isLoadingComingSoon = true;
+  bool isLoadingFinished = true;
 
   @override
   void initState() {
@@ -59,18 +59,18 @@ class _ContestGridPageState extends State<ContestGridPage> {
     setState(() {
       switch (index) {
         case 1:
-          isLoading1 = true;
+          isLoadingOnGoing = true;
           break;
         case 2:
-          isLoading2 = true;
+          isLoadingComingSoon = true;
           break;
         case 3:
-          isLoading3 = true;
+          isLoadingFinished = true;
           break;
       }
     });
 
-    List<CategorizedNewsData>? data;
+    List<CategorizedTilesData>? data;
     switch (index) {
       case 1:
         data = await widget.fetchDataOnGoing();
@@ -86,16 +86,16 @@ class _ContestGridPageState extends State<ContestGridPage> {
     setState(() {
       switch (index) {
         case 1:
-          isLoading1 = false;
-          data1 = data;
+          isLoadingOnGoing = false;
+          dataOnGoing = data;
           break;
         case 2:
-          isLoading2 = false;
-          data2 = data;
+          isLoadingComingSoon = false;
+          dataComingSoon = data;
           break;
         case 3:
-          isLoading3 = false;
-          data3 = data;
+          isLoadingFinished = false;
+          dataFinished = data;
           break;
       }
     });
@@ -155,9 +155,10 @@ class _ContestGridPageState extends State<ContestGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading1
+                              child: isLoadingOnGoing
                                   ? const CircularProgressIndicator()
-                                  : (data1 == null || data1!.isEmpty)
+                                  : (dataOnGoing == null ||
+                                          dataOnGoing!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -173,9 +174,11 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data1?.length ?? 0,
+                                                itemCount:
+                                                    dataOnGoing?.length ?? 0,
                                                 itemBuilder: (context, index) {
-                                                  final contest = data1![index];
+                                                  final contest =
+                                                      dataOnGoing![index];
                                                   return HorizontalTile(
                                                     id: contest.id,
                                                     imagePath:
@@ -189,7 +192,9 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                     time: contest.time,
                                                     joined: contest.joined,
                                                     callBack: () {
-                                                      int id = data1![index].id;
+                                                      int id =
+                                                          dataOnGoing![index]
+                                                              .id;
                                                       fetchContestData(id)
                                                           .then((contestData) {
                                                         Navigator.push(
@@ -230,9 +235,10 @@ class _ContestGridPageState extends State<ContestGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading2
+                              child: isLoadingComingSoon
                                   ? const CircularProgressIndicator()
-                                  : (data2 == null || data2!.isEmpty)
+                                  : (dataComingSoon == null ||
+                                          dataComingSoon!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -248,10 +254,11 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data2?.length ?? 0,
+                                                itemCount:
+                                                    dataComingSoon?.length ?? 0,
                                                 itemBuilder: (context, index) {
                                                   final campaign =
-                                                      data2![index];
+                                                      dataComingSoon![index];
                                                   return HorizontalTile(
                                                     id: campaign.id,
                                                     imagePath:
@@ -265,7 +272,9 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                     time: campaign.time,
                                                     joined: campaign.joined,
                                                     callBack: () {
-                                                      int id = data2![index].id;
+                                                      int id =
+                                                          dataComingSoon![index]
+                                                              .id;
                                                       fetchContestData(id)
                                                           .then((contestData) {
                                                         Navigator.push(
@@ -306,9 +315,10 @@ class _ContestGridPageState extends State<ContestGridPage> {
                             const SizedBox(height: 10),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: isLoading3
+                              child: isLoadingFinished
                                   ? const CircularProgressIndicator()
-                                  : (data3 == null || data3!.isEmpty)
+                                  : (dataFinished == null ||
+                                          dataFinished!.isEmpty)
                                       ? widget.blankPage
                                       : GestureDetector(
                                           child: SingleChildScrollView(
@@ -324,9 +334,11 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                   mainAxisSpacing: 0,
                                                   childAspectRatio: 99 / 185,
                                                 ),
-                                                itemCount: data3?.length ?? 0,
+                                                itemCount:
+                                                    dataFinished?.length ?? 0,
                                                 itemBuilder: (context, index) {
-                                                  final contest = data3![index];
+                                                  final contest =
+                                                      dataFinished![index];
                                                   return HorizontalTile(
                                                     id: contest.id,
                                                     imagePath:
@@ -340,7 +352,9 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                                     time: contest.time,
                                                     joined: contest.joined,
                                                     callBack: () {
-                                                      int id = data3![index].id;
+                                                      int id =
+                                                          dataFinished![index]
+                                                              .id;
                                                       fetchContestData(id)
                                                           .then((contestData) {
                                                         Navigator.push(

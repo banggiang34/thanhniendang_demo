@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 
 class ApiServiceContest {
-  static Future<List<CategorizedNewsData>> fetchOngoingContests() async {
+  static Future<List<CategorizedTilesData>> fetchOngoingContests() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/contest/'));
 
@@ -13,7 +13,7 @@ class ApiServiceContest {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final ongoingList = <CategorizedNewsData>[];
+      final ongoingList = <CategorizedTilesData>[];
 
       items.forEach((contest) {
         DateTime fromDate = DateTime.parse(contest['start_at']);
@@ -30,7 +30,7 @@ class ApiServiceContest {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchFinishedContests() async {
+  static Future<List<CategorizedTilesData>> fetchFinishedContests() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/contest/'));
 
@@ -39,7 +39,7 @@ class ApiServiceContest {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final finishedList = <CategorizedNewsData>[];
+      final finishedList = <CategorizedTilesData>[];
 
       items.forEach((contest) {
         DateTime toDate = DateTime.parse(contest['end_at']);
@@ -55,7 +55,7 @@ class ApiServiceContest {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchComingSoonContests() async {
+  static Future<List<CategorizedTilesData>> fetchComingSoonContests() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/contest/'));
 
@@ -64,7 +64,7 @@ class ApiServiceContest {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final comingSoonList = <CategorizedNewsData>[];
+      final comingSoonList = <CategorizedTilesData>[];
 
       items.forEach((contest) {
         DateTime fromDate = DateTime.parse(contest['start_at']);
@@ -80,7 +80,7 @@ class ApiServiceContest {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchAllContests() async {
+  static Future<List<CategorizedTilesData>> fetchAllContests() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/contest/'));
 
@@ -88,14 +88,14 @@ class ApiServiceContest {
       final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
       final items = jsonResponse['items'] as List<dynamic>;
 
-      final newsDataList = items.map<CategorizedNewsData>((contest) {
+      final newsDataList = items.map<CategorizedTilesData>((contest) {
         DateTime dateTime = DateTime.parse(contest['start_at']);
         String parsedDate = DateFormat('dd/MM').format(dateTime);
 
         DateTime todateTime = DateTime.parse(contest['end_at']);
         String parsedToDate = DateFormat('dd/MM').format(todateTime);
 
-        return CategorizedNewsData(
+        return CategorizedTilesData(
           imagePath: contest['cover_image'],
           categoryimagePath: '',
           category: '',
@@ -115,7 +115,7 @@ class ApiServiceContest {
     }
   }
 
-  static CategorizedNewsData _createCategorizedNewsData(
+  static CategorizedTilesData _createCategorizedNewsData(
       Map<String, dynamic> contest) {
     DateTime dateTime = DateTime.parse(contest['start_at']);
     String parsedDate = DateFormat('dd/MM').format(dateTime);
@@ -123,7 +123,7 @@ class ApiServiceContest {
     DateTime todateTime = DateTime.parse(contest['end_at']);
     String parsedToDate = DateFormat('dd/MM').format(todateTime);
 
-    return CategorizedNewsData(
+    return CategorizedTilesData(
       imagePath: contest['cover_image'],
       categoryimagePath: '',
       category: '',

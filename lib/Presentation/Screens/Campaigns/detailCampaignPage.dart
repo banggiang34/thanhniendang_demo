@@ -19,7 +19,6 @@ class DetailCampaignPage extends StatefulWidget {
 
 class _DetailCampaignPageState extends State<DetailCampaignPage> {
   bool _showMoreText = false;
-  List<String> imageUrls = [];
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +92,8 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: const Color(0xff0269E9),
                               ),
-                              child: const Text(
-                                'Đang diễn ra',
+                              child: Text(
+                                campaignData.status,
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
@@ -369,28 +368,23 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                    ),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: imageUrls.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            imageUrls[index],
-                            width: 120,
-                            height: 120,
-                            fit: BoxFit.cover,
-                          ),
+                  child: Wrap(
+                    spacing: 4,
+                    runSpacing: 8,
+                    children: widget.campaignData.imagesUrls.map((index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          index,
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Text('Image not available');
+                          },
                         ),
                       );
-                    },
+                    }).toList(),
                   ),
                 ),
                 Padding(

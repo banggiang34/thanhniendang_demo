@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'campaignDetailData.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'detailCampaignPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'fetchDataDetailCampaign.dart';
 
 class HorizontalScrollSectionCampaign extends StatefulWidget {
-  final Future<List<CategorizedNewsData>> Function() fetchData;
+  final Future<List<CategorizedTilesData>> Function() fetchData;
 
   HorizontalScrollSectionCampaign({required this.fetchData});
 
@@ -17,7 +17,7 @@ class HorizontalScrollSectionCampaign extends StatefulWidget {
 
 class _HorizontalScrollSectionCampaignState
     extends State<HorizontalScrollSectionCampaign> {
-  List<CategorizedNewsData> newsDataList = [];
+  List<CategorizedTilesData> newsDataList = [];
   bool isLoading = true;
 
   @override
@@ -28,7 +28,7 @@ class _HorizontalScrollSectionCampaignState
 
   Future<void> fetchDataAndUpdateUI() async {
     try {
-      List<CategorizedNewsData> data = await widget.fetchData();
+      List<CategorizedTilesData> data = await widget.fetchData();
       setState(() {
         newsDataList = data;
         isLoading = false;
@@ -57,7 +57,7 @@ class _HorizontalScrollSectionCampaignState
               scrollDirection: Axis.horizontal,
               itemCount: newsDataList.length,
               itemBuilder: (context, index) {
-                CategorizedNewsData newsData = newsDataList[index];
+                CategorizedTilesData newsData = newsDataList[index];
                 return HorizontalTile(
                   id: newsData.id,
                   imagePath: newsData.imagePath,

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 
 class ApiService {
-  static Future<List<CategorizedNewsData>> fetchOngoingCampaigns() async {
+  static Future<List<CategorizedTilesData>> fetchOngoingCampaigns() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/campaign/'));
 
@@ -13,7 +13,7 @@ class ApiService {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final ongoingList = <CategorizedNewsData>[];
+      final ongoingList = <CategorizedTilesData>[];
 
       items.forEach((campaign) {
         DateTime fromDate = DateTime.parse(campaign['registration_from']);
@@ -30,7 +30,7 @@ class ApiService {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchFinishedCampaigns() async {
+  static Future<List<CategorizedTilesData>> fetchFinishedCampaigns() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/campaign'));
 
@@ -39,7 +39,7 @@ class ApiService {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final finishedList = <CategorizedNewsData>[];
+      final finishedList = <CategorizedTilesData>[];
 
       items.forEach((campaign) {
         DateTime toDate = DateTime.parse(campaign['registration_to']);
@@ -55,7 +55,7 @@ class ApiService {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchComingSoonCampaigns() async {
+  static Future<List<CategorizedTilesData>> fetchComingSoonCampaigns() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/campaign'));
 
@@ -64,7 +64,7 @@ class ApiService {
       final items = jsonResponse['items'] as List<dynamic>;
 
       final currentDate = DateTime.now();
-      final comingSoonList = <CategorizedNewsData>[];
+      final comingSoonList = <CategorizedTilesData>[];
 
       items.forEach((campaign) {
         DateTime fromDate = DateTime.parse(campaign['registration_from']);
@@ -80,7 +80,7 @@ class ApiService {
     }
   }
 
-  static Future<List<CategorizedNewsData>> fetchAllCampaigns() async {
+  static Future<List<CategorizedTilesData>> fetchAllCampaigns() async {
     final response = await http
         .get(Uri.parse('https://intern.try0.xyz/api/v1/activity/campaign'));
 
@@ -88,14 +88,14 @@ class ApiService {
       final jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
       final items = jsonResponse['items'] as List<dynamic>;
 
-      final newsDataList = items.map<CategorizedNewsData>((campaign) {
+      final newsDataList = items.map<CategorizedTilesData>((campaign) {
         DateTime dateTime = DateTime.parse(campaign['registration_from']);
         String parsedDate = DateFormat('dd/MM').format(dateTime);
 
         DateTime todateTime = DateTime.parse(campaign['registration_to']);
         String parsedToDate = DateFormat('dd/MM').format(todateTime);
 
-        return CategorizedNewsData(
+        return CategorizedTilesData(
           imagePath: campaign['cover_image'],
           categoryimagePath: '',
           category: campaign['type_obj']['label'],
@@ -115,7 +115,7 @@ class ApiService {
     }
   }
 
-  static CategorizedNewsData _createCategorizedNewsData(
+  static CategorizedTilesData _createCategorizedNewsData(
       Map<String, dynamic> campaign) {
     DateTime dateTime = DateTime.parse(campaign['registration_from']);
     String parsedDate = DateFormat('dd/MM').format(dateTime);
@@ -123,7 +123,7 @@ class ApiService {
     DateTime todateTime = DateTime.parse(campaign['registration_to']);
     String parsedToDate = DateFormat('dd/MM').format(todateTime);
 
-    return CategorizedNewsData(
+    return CategorizedTilesData(
       imagePath: campaign['cover_image'],
       categoryimagePath: '',
       category: campaign['type_obj']['label'],

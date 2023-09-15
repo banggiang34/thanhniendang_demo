@@ -1,4 +1,4 @@
-class CategorizedNewsData {
+class CategorizedTilesData {
   final String imagePath;
   final String categoryimagePath;
   final String category;
@@ -10,7 +10,7 @@ class CategorizedNewsData {
   final Function callBack;
   final int id;
 
-  CategorizedNewsData({
+  CategorizedTilesData({
     required this.imagePath,
     required this.categoryimagePath,
     required this.category,

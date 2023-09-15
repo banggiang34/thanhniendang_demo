@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContes
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestGridPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
@@ -28,7 +28,7 @@ class MainScrollPage extends StatefulWidget {
 }
 
 class _MainScrollPageState extends State<MainScrollPage> {
-  late Future<List<CategorizedNewsData>> contestsFuture;
+  late Future<List<CategorizedTilesData>> contestsFuture;
   late Future<List<NewsTilesData>> latestNewsFuture;
   final campaignsDataFuture = ApiService.fetchAllCampaigns();
   final newsDataContest = ApiServiceContest.fetchAllContests();
