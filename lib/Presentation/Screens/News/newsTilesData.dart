@@ -1,10 +1,10 @@
-class LatestNewsData {
+class NewsTilesData {
   final String imagePath;
   final String title;
   final String time;
   final int id;
 
-  LatestNewsData({
+  NewsTilesData({
     required this.imagePath,
     required this.title,
     required this.time,

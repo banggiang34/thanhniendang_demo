@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/detailNewsPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataDetailNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/latestNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
 
 class HighLightNews extends StatefulWidget {
-  final List<LatestNewsData> highlightNewsList;
+  final List<NewsTilesData> highlightNewsList;
 
   HighLightNews({
     required this.highlightNewsList,

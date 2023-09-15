@@ -5,16 +5,16 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignGridPa
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/horizontalScrollSectionCampaign.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataCampaign.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContest.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/verticleTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedNewsData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestGridPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataLatestNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/horizontalScrollSectionContest.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/latestNewsData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;
@@ -29,7 +29,7 @@ class MainScrollPage extends StatefulWidget {
 
 class _MainScrollPageState extends State<MainScrollPage> {
   late Future<List<CategorizedNewsData>> contestsFuture;
-  late Future<List<LatestNewsData>> latestNewsFuture;
+  late Future<List<NewsTilesData>> latestNewsFuture;
   final campaignsDataFuture = ApiService.fetchAllCampaigns();
   final newsDataContest = ApiServiceContest.fetchAllContests();
 
@@ -53,21 +53,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
     );
   }
 
-  List<LatestNewsData> latestNewsList = [];
-  List<LatestNewsData> highLightNewsList = [];
-
-  List<Widget> buildVerticalTiles(List<LatestNewsData> dataList) {
-    return dataList.map(
-      (data) {
-        return VerticleTile(
-          title: data.title,
-          imagePath: data.imagePath,
-          time: data.time,
-        );
-      },
-    ).toList();
-  }
-
+  List<NewsTilesData> latestNewsList = [];
+  List<NewsTilesData> highLightNewsList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -592,12 +579,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: buildVerticalTiles(latestNewsList),
-                  ),
-                ),
+                VerticalScrollSectionNews(newsDataList: latestNewsList),
                 Stack(
                   children: [
                     Container(
