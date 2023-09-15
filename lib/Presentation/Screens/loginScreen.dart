@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
 import 'package:thanh_nien_da_nang/Elements/TextBox/buildemailBox.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
 import 'package:thanh_nien_da_nang/Elements/TextBox/buildpasswordBox.dart';
@@ -102,7 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 70,
                           height: 70,
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 20, top: 65),
+                        child: CloseBtn(),
+                      ),
                     ],
                   ),
                   Container(

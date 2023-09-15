@@ -27,6 +27,7 @@ class DetailNewsPage extends StatelessWidget {
             title: Text(
               newsData.title,
               maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,

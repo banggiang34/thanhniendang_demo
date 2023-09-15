@@ -7,6 +7,7 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataCampa
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContest.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCollectionPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
@@ -545,7 +546,14 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   child: Row(
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsCollectionPage(),
+                            ),
+                          );
+                        },
                         child: Row(
                           children: [
                             const Text(
