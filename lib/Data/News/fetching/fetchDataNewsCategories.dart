@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsCategoriesData.dart';
 
 Future<List<NewsCategoriesData>> fetchNewsCategories() async {
   final url = Uri.parse(

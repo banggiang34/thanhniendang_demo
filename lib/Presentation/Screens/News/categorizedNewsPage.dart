@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataCategorizedNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataCategorizedNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 
 class CategorizedNewsPage extends StatefulWidget {

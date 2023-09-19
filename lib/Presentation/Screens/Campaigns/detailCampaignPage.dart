@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'campaignDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
 
 class DetailCampaignPage extends StatefulWidget {
   final int id;

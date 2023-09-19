@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataDetailContest.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/fetchDataDetailContest.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
 
 class ContestGridPage extends StatefulWidget {

@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignGridPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/horizontalScrollSectionCampaign.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataCampaign.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContest.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataCampaign.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/fetchDataContest.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCollectionPage.dart';
@@ -12,10 +12,10 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestGridPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataLatestNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataHighLightNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataLatestNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/horizontalScrollSectionContest.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;

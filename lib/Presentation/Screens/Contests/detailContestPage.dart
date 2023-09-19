@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/buildlogsigninBtn.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/buildreversedlogsigninBtn.dart';
 
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
 
 class DetailContestPage extends StatefulWidget {
   final int id;

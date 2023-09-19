@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/detailNewsPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataDetailNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataDetailNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsDetailData.dart';
 
 class HighLightNews extends StatefulWidget {
   final List<NewsTilesData> highlightNewsList;

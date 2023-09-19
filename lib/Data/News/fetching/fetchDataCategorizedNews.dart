@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
 class FetchDataCategorizedNews {
   Future<List<NewsTilesData>> fetchDataByValue(int value) async {

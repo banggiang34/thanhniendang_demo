@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
 
 class fetchDataDetailContest {
   static Future<ContestDetailData> fetchDataById(int id) async {

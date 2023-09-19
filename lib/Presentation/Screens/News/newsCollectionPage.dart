@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataLatestNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataHighLightNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataLatestNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
 class NewsCollectionPage extends StatefulWidget {
   const NewsCollectionPage({super.key});

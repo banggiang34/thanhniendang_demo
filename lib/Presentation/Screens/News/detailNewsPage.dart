@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
-import 'fetchDataRelatedNews.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataRelatedNews.dart';
 
 class DetailNewsPage extends StatefulWidget {
   final int id;

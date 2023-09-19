@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/categorizedNewsPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataNewsCategories.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataNewsCategories.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsCategoriesData.dart';
 
 class NewsCategoriesPage extends StatefulWidget {
   const NewsCategoriesPage({Key? key}) : super(key: key);

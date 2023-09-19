@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/detailCampaignPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataDetailCampaign.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
 
 class CampaignGridPage extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchDataOnGoing;

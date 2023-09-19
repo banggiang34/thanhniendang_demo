@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'campaignDetailData.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'detailCampaignPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'fetchDataDetailCampaign.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
 
 class HorizontalScrollSectionCampaign extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchData;

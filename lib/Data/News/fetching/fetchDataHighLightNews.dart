@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
-Future<List<NewsTilesData>> fetchLatestNews() async {
-  final apiUrl = 'https://intern.try0.xyz/api/v1/article/news/?category/';
+Future<List<NewsTilesData>> fetchHighLightNews() async {
+  final apiUrl = 'https://intern.try0.xyz/api/v1/article/news/?type=2';
   final response = await http.get(Uri.parse(apiUrl));
 
   if (response.statusCode == 200) {
@@ -13,14 +12,11 @@ Future<List<NewsTilesData>> fetchLatestNews() async {
     List<NewsTilesData> latestNewsList = [];
 
     for (var item in jsonData['items']) {
-      DateTime dateTime = DateTime.parse(item['updated_at']);
-      String parsedDate = DateFormat.yMd().format(dateTime);
-
       latestNewsList.add(
         NewsTilesData(
           imagePath: item['cover_image'],
           title: item['title'],
-          time: parsedDate,
+          time: '',
           id: item['id'],
         ),
       );
@@ -28,6 +24,6 @@ Future<List<NewsTilesData>> fetchLatestNews() async {
 
     return latestNewsList;
   } else {
-    throw Exception('Failed to load latest news');
+    throw Exception('Failed to load featured news');
   }
 }
