@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
 import 'fetchDataRelatedNews.dart';
@@ -24,11 +24,12 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
   final FetchDataRelatedNews fetchDataRelatedNews = FetchDataRelatedNews();
 
   void initState() {
+    print('DetailNewsPage id: ${widget.id}');
     super.initState();
     fetchDataRelatedNews.fetchDataById(widget.id).then(
-      (NewsTilesData newsData) {
+      (List<NewsTilesData> newsList) {
         setState(() {
-          relatedNewsList = [newsData];
+          relatedNewsList = newsList;
         });
       },
     );

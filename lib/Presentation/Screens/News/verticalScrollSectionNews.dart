@@ -22,7 +22,7 @@ class _VerticalScrollSectionNewsState extends State<VerticalScrollSectionNews> {
         return GestureDetector(
           onTap: () {
             int id = data.id;
-            fetchDataDetailNews.fetchDataById(id).then((newsData) {
+            FetchDataDetailNews.fetchDataById(id).then((newsData) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -46,11 +46,8 @@ class _VerticalScrollSectionNewsState extends State<VerticalScrollSectionNews> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        children: buildVerticalTiles(widget.newsDataList),
-      ),
+    return Column(
+      children: buildVerticalTiles(widget.newsDataList),
     );
   }
 }

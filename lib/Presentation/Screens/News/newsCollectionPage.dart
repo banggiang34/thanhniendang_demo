@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataHighLightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataLatestNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';

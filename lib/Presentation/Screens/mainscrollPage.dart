@@ -5,7 +5,7 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/campaignGridPa
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/horizontalScrollSectionCampaign.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/fetchDataCampaign.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/fetchDataContest.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCollectionPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
@@ -628,7 +628,11 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                VerticalScrollSectionNews(newsDataList: latestNewsList),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child:
+                      VerticalScrollSectionNews(newsDataList: latestNewsList),
+                ),
                 Stack(
                   children: [
                     Container(

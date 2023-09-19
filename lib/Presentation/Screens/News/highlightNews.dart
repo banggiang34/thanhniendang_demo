@@ -25,7 +25,7 @@ class _HighLightNewsState extends State<HighLightNews> {
   }
 
   Future<NewsDetailData> fetchNewsData(int id) async {
-    final newsData = await fetchDataDetailNews.fetchDataById(id);
+    final newsData = await FetchDataDetailNews.fetchDataById(id);
     return newsData;
   }
 
@@ -60,8 +60,7 @@ class _HighLightNewsState extends State<HighLightNews> {
                       return GestureDetector(
                         onTap: () {
                           int id = newsItem.id;
-                          fetchDataDetailNews
-                              .fetchDataById(id)
+                          FetchDataDetailNews.fetchDataById(id)
                               .then((newsData) {
                             Navigator.push(
                               context,

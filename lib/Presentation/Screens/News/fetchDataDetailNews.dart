@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
 
-class fetchDataDetailNews {
+class FetchDataDetailNews {
   static Future<NewsDetailData> fetchDataById(int id) async {
     final url = 'https://intern.try0.xyz/api/v1/article/news/' + id.toString();
 
