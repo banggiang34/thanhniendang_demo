@@ -117,7 +117,11 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
                     ),
                   ),
                 ),
-                VerticalScrollSectionNews(newsDataList: latestNewsList)
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child:
+                      VerticalScrollSectionNews(newsDataList: latestNewsList),
+                )
               ],
             ),
           ),
