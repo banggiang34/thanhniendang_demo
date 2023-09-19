@@ -1,15 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataNewsCategories.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesData.dart';
 
 class NewsCategoriesPage extends StatefulWidget {
-  const NewsCategoriesPage({super.key});
+  const NewsCategoriesPage({Key? key}) : super(key: key);
 
   @override
-  State<NewsCategoriesPage> createState() => _NewsCategoriesPageState();
+  _NewsCategoriesPageState createState() => _NewsCategoriesPageState();
 }
 
 class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
+  List<NewsCategoriesData> categoryList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  void fetchCategories() async {
+    try {
+      final fetchedCategories = await fetchNewsCategories();
+      setState(() {
+        categoryList = fetchedCategories;
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,11 +92,113 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.all(25),
+                  child: isLoading
+                      ? CircularProgressIndicator()
+                      : categoryList.isEmpty
+                          ? Text('No categories available.')
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: categoryList.length,
+                              itemBuilder: (context, index) {
+                                final category = categoryList[index];
+                                return Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    CategoryItem(category),
+                                    Divider(
+                                      color: Color(0xffDDDDDD),
+                                      thickness: 1.0,
+                                      height: 0.0,
+                                    ),
+                                    SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class CategoryItem extends StatefulWidget {
+  final NewsCategoriesData category;
+
+  CategoryItem(this.category);
+
+  @override
+  _CategoryItemState createState() => _CategoryItemState();
+}
+
+class _CategoryItemState extends State<CategoryItem> {
+  bool isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  widget.category.category[0],
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              if (widget.category.category.length > 1)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    icon: Icon(
+                      isExpanded ? Icons.remove : Icons.add,
+                      color: Color(0xff0269E9),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
+                  ),
+                ),
+            ],
+          ),
+        ),
+        if (isExpanded) ...[
+          for (int i = 1; i < widget.category.category.length; i++)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.category.category[i],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ],
     );
   }
 }

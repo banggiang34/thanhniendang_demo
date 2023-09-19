@@ -5,11 +5,10 @@ class NewsDetailData {
   final String content;
   final int id;
 
-  const NewsDetailData({
-    required this.title,
-    required this.date,
-    required this.categories,
-    required this.content,
-    required this.id,
-  });
+  const NewsDetailData(
+      {required this.title,
+      required this.date,
+      required this.categories,
+      required this.content,
+      required this.id});
 }

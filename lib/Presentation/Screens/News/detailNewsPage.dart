@@ -24,7 +24,6 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
   final FetchDataRelatedNews fetchDataRelatedNews = FetchDataRelatedNews();
 
   void initState() {
-    print('DetailNewsPage id: ${widget.id}');
     super.initState();
     fetchDataRelatedNews.fetchDataById(widget.id).then(
       (List<NewsTilesData> newsList) {
