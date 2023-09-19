@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/categorizedNewsPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/fetchDataNewsCategories.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesData.dart';
 
@@ -142,6 +143,8 @@ class _CategoryItemState extends State<CategoryItem> {
 
   @override
   Widget build(BuildContext context) {
+    final value = widget.category.value; // Extract the value
+
     return Column(
       children: [
         ListTile(
@@ -149,11 +152,25 @@ class _CategoryItemState extends State<CategoryItem> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Text(
-                  widget.category.category[0],
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CategorizedNewsPage(
+                          value: value,
+                          headerTitle: widget.category.category[
+                              0], // Use the category name as the header title
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    widget.category.category[0],
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -183,11 +200,14 @@ class _CategoryItemState extends State<CategoryItem> {
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Column(
                   children: [
-                    Text(
-                      widget.category.category[i],
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        widget.category.category[i],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     SizedBox(height: 10),

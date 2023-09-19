@@ -30,6 +30,7 @@ void extractCategories(
     final data = NewsCategoriesData(
       category: [category['label'], ...subCategories],
       subCategories: subCategories,
+      value: category['value'],
     );
     result.add(data);
   }
