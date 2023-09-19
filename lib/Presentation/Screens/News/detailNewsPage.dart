@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
-
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/VerticleScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsTilesData.dart';
+import 'fetchDataRelatedNews.dart';
 
-class DetailNewsPage extends StatelessWidget {
+class DetailNewsPage extends StatefulWidget {
   final int id;
   final NewsDetailData newsData;
 
@@ -13,6 +15,26 @@ class DetailNewsPage extends StatelessWidget {
     required this.newsData,
     required this.id,
   }) : super(key: key);
+
+  @override
+  State<DetailNewsPage> createState() => _DetailNewsPageState();
+}
+
+class _DetailNewsPageState extends State<DetailNewsPage> {
+  final FetchDataRelatedNews fetchDataRelatedNews = FetchDataRelatedNews();
+
+  void initState() {
+    super.initState();
+    fetchDataRelatedNews.fetchDataById(widget.id).then(
+      (NewsTilesData newsData) {
+        setState(() {
+          relatedNewsList = [newsData];
+        });
+      },
+    );
+  }
+
+  List<NewsTilesData> relatedNewsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +47,7 @@ class DetailNewsPage extends StatelessWidget {
           child: FlexibleSpaceBar(
             centerTitle: true,
             title: Text(
-              newsData.title,
+              widget.newsData.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -58,7 +80,7 @@ class DetailNewsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          newsData.title,
+                          widget.newsData.title,
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
@@ -70,7 +92,7 @@ class DetailNewsPage extends StatelessWidget {
                             Image.asset('images/calendar1.png'),
                             SizedBox(width: 5),
                             Text(
-                              'Đăng vào ' + newsData.date,
+                              'Đăng vào ' + widget.newsData.date,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -85,7 +107,8 @@ class DetailNewsPage extends StatelessWidget {
                           child: Wrap(
                             spacing: 4,
                             runSpacing: 8,
-                            children: newsData.categories.map((category) {
+                            children:
+                                widget.newsData.categories.map((category) {
                               return Container(
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
@@ -105,7 +128,18 @@ class DetailNewsPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 20),
-                        Html(data: newsData.content),
+                        Html(
+                          data: widget.newsData.content,
+                          style: {"p": Style(fontFamily: 'SF-Pro')},
+                        ),
+                        SizedBox(height: 25),
+                        Text(
+                          'Bài viết liên quan',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w700),
+                        ),
+                        SizedBox(height: 20),
+                        VerticalScrollSectionNews(newsDataList: relatedNewsList)
                       ],
                     ),
                   );

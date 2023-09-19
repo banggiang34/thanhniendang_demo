@@ -212,7 +212,24 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
-                                        onPressed: () => print('conmeo'),
+                                        onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CampaignGridPage(
+                                              fetchDataOnGoing: () => ApiService
+                                                  .fetchOngoingCampaigns(),
+                                              fetchDataComingSoon: () =>
+                                                  ApiService
+                                                      .fetchComingSoonCampaigns(),
+                                              fetchDataFinished: () =>
+                                                  ApiService
+                                                      .fetchFinishedCampaigns(),
+                                              blankPage:
+                                                  const CampaignBlankPage(),
+                                            ),
+                                          ),
+                                        ),
                                         icon: Image.asset(
                                             'images/homescroll1.png'),
                                       ),
@@ -240,7 +257,25 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
-                                        onPressed: () => print('conmeo'),
+                                        onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ContestGridPage(
+                                              fetchDataOnGoing: () =>
+                                                  ApiServiceContest
+                                                      .fetchOngoingContests(),
+                                              fetchDataComingSoon: () =>
+                                                  ApiServiceContest
+                                                      .fetchComingSoonContests(),
+                                              fetchDataFinished: () =>
+                                                  ApiServiceContest
+                                                      .fetchFinishedContests(),
+                                              blankPage:
+                                                  const ContestBlankPage(),
+                                            ),
+                                          ),
+                                        ),
                                         icon: Image.asset(
                                             'images/homescroll2.png'),
                                       ),
@@ -268,7 +303,13 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
-                                        onPressed: () => print('conmeo'),
+                                        onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsCollectionPage(),
+                                          ),
+                                        ),
                                         icon: Image.asset(
                                             'images/homescroll3.png'),
                                       ),

@@ -61,7 +61,7 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 30, top: 50),
+                      padding: EdgeInsets.only(right: 25, top: 50),
                       child: CloseBtn(),
                     ),
                   ],
