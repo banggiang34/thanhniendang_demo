@@ -183,13 +183,11 @@ class _CategoryItemState extends State<CategoryItem> {
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Column(
                   children: [
-                    Expanded(
-                      child: Text(
-                        widget.category.category[i],
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    Text(
+                      widget.category.category[i],
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     SizedBox(height: 10),
