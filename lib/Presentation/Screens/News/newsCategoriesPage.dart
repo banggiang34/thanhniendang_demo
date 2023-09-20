@@ -4,6 +4,7 @@ import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/categorizedNewsPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataNewsCategories.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsCategoriesData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/subCategorizedNewsPage.dart';
 
 class NewsCategoriesPage extends StatefulWidget {
   const NewsCategoriesPage({Key? key}) : super(key: key);
@@ -201,7 +202,18 @@ class _CategoryItemState extends State<CategoryItem> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubCategorizedNewsPage(
+                              value: value,
+                              headerTitle: widget.category.category[
+                                  0], // Use the category name as the header title
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
                         widget.category.category[i],
                         style: TextStyle(

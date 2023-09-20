@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataCategorizedNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/categorizedNewsBlankPage.dart';
+import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataSubCategorizedNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 
-class CategorizedNewsPage extends StatefulWidget {
+class SubCategorizedNewsPage extends StatefulWidget {
   final int value;
   final String headerTitle;
 
-  const CategorizedNewsPage({
+  const SubCategorizedNewsPage({
     Key? key,
     required this.value,
     required this.headerTitle,
   }) : super(key: key);
 
   @override
-  State<CategorizedNewsPage> createState() => _CategorizedNewsPageState();
+  State<SubCategorizedNewsPage> createState() => _SubCategorizedNewsPageState();
 }
 
-class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
-  final FetchDataCategorizedNews fetchDataCategorizedNews =
-      FetchDataCategorizedNews();
+class _SubCategorizedNewsPageState extends State<SubCategorizedNewsPage> {
+  final FetchDataSubCategorizedNews fetchDataCategorizedNews =
+      FetchDataSubCategorizedNews();
 
-  List<NewsTilesData> categorizedNewsList = [];
-
-  @override
   void initState() {
     super.initState();
     fetchDataCategorizedNews.fetchDataByValue(widget.value).then(
@@ -37,6 +33,8 @@ class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
       },
     );
   }
+
+  List<NewsTilesData> categorizedNewsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +88,8 @@ class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child: categorizedNewsList.isEmpty
-                  ? CategorizedNewsBlankPage()
-                  : VerticalScrollSectionNews(
-                      newsDataList: categorizedNewsList),
+              child:
+                  VerticalScrollSectionNews(newsDataList: categorizedNewsList),
             ),
           ),
         ),
