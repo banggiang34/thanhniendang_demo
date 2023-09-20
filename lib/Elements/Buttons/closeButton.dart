@@ -11,7 +11,7 @@ class CloseBtn extends StatelessWidget {
         onPressed: () => Navigator.pop(context),
         icon: Container(
           width: 35,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
           ),
