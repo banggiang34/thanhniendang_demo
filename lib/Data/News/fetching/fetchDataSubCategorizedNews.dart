@@ -32,7 +32,6 @@ class FetchDataSubCategorizedNews {
         throw Exception('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error loading data: $e');
       throw Exception('Failed to load data');
     }
   }

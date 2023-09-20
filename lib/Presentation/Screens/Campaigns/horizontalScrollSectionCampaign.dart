@@ -37,7 +37,6 @@ class _HorizontalScrollSectionCampaignState
       setState(() {
         isLoading = false;
       });
-      print('Error: $error');
     }
   }
 

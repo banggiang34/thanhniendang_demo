@@ -16,7 +16,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   bool _isLoading = false;
 
   Future<void> _sendForgotPasswordRequest() async {
-    final String apiUrl =
+    const String apiUrl =
         'https://intern.try0.xyz/api/v1/account/user/forgot-password/';
     final String email = _emailController.text;
 
@@ -52,7 +52,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       setState(() {
         _isLoading = false;
       });
-      print('Error sending password reset request: ${response.reasonPhrase}');
     }
   }
 

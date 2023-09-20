@@ -39,7 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = false;
       });
-      print('con meo thanh cong');
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -54,8 +53,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = false;
       });
-      print('that bai con meo');
-      print(response.body);
       final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
       final errorMessage = responseBody['detail'] ?? 'An error occurred';
       showDialog(

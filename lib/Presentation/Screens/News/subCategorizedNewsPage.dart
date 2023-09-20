@@ -28,13 +28,13 @@ class _SubCategorizedNewsPageState extends State<SubCategorizedNewsPage> {
     fetchDataCategorizedNews.fetchDataByValue(widget.value).then(
       (List<NewsTilesData> newsList) {
         setState(() {
-          categorizedNewsList = newsList;
+          subCategorizedNewsList = newsList;
         });
       },
     );
   }
 
-  List<NewsTilesData> categorizedNewsList = [];
+  List<NewsTilesData> subCategorizedNewsList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _SubCategorizedNewsPageState extends State<SubCategorizedNewsPage> {
           title: Text(
             widget.headerTitle,
             maxLines: 1,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: Color(0xff1F1F1F),
@@ -66,16 +66,17 @@ class _SubCategorizedNewsPageState extends State<SubCategorizedNewsPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewsCategoriesPage()),
+                MaterialPageRoute(
+                    builder: (context) => const NewsCategoriesPage()),
               );
             },
             icon: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xff0269E9),
               ),
               child: Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Image.asset('images/menu1.png'),
               ),
             ),
@@ -88,8 +89,8 @@ class _SubCategorizedNewsPageState extends State<SubCategorizedNewsPage> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(20),
-              child:
-                  VerticalScrollSectionNews(newsDataList: categorizedNewsList),
+              child: VerticalScrollSectionNews(
+                  newsDataList: subCategorizedNewsList),
             ),
           ),
         ),

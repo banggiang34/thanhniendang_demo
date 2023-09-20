@@ -53,11 +53,9 @@ class _DetailContestPageState extends State<DetailContestPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  child: Image.network(
-                    contestData.imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                Image.network(
+                  contestData.imagePath,
+                  fit: BoxFit.cover,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20),
@@ -120,21 +118,19 @@ class _DetailContestPageState extends State<DetailContestPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Container(
-                        child: Row(
-                          children: [
-                            Image.asset('images/checkgreen.png'),
-                            const SizedBox(width: 5),
-                            const Text(
-                              'Bạn đã hoàn thành cuộc thi này',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff00B191),
-                              ),
-                            )
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Image.asset('images/checkgreen.png'),
+                          const SizedBox(width: 5),
+                          const Text(
+                            'Bạn đã hoàn thành cuộc thi này',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff00B191),
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 20),
                       Column(

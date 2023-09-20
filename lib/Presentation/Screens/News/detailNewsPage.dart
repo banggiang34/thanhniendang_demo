@@ -43,14 +43,14 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
         elevation: 0,
         centerTitle: true,
         flexibleSpace: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 50),
+          padding: const EdgeInsets.symmetric(horizontal: 50),
           child: FlexibleSpaceBar(
             centerTitle: true,
             title: Text(
               widget.newsData.title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
                 color: Color(0xff1F1F1F),
@@ -81,19 +81,19 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                       children: [
                         Text(
                           widget.newsData.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Row(
                           children: [
                             Image.asset('images/calendar1.png'),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(
                               'Đăng vào ' + widget.newsData.date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff8A8A8A),
@@ -101,7 +101,7 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Wrap(
@@ -110,14 +110,14 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                             children:
                                 widget.newsData.categories.map((category) {
                               return Container(
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color(0xffF5F5F5),
+                                  color: const Color(0xffF5F5F5),
                                 ),
                                 child: Text(
                                   category,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                     color: Color(0xff6A6A6A),
@@ -127,18 +127,18 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
                             }).toList(),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Html(
                           data: widget.newsData.content,
                           style: {"p": Style(fontFamily: 'SF-Pro')},
                         ),
-                        SizedBox(height: 25),
-                        Text(
+                        const SizedBox(height: 25),
+                        const Text(
                           'Bài viết liên quan',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w700),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         VerticalScrollSectionNews(newsDataList: relatedNewsList)
                       ],
                     ),

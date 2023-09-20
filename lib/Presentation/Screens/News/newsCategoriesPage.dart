@@ -34,7 +34,6 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
       setState(() {
         isLoading = false;
       });
-      print('Error: $error');
     }
   }
 
@@ -75,7 +74,7 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom: 0,
                       child: Padding(
                         padding: EdgeInsets.all(25),
@@ -88,34 +87,34 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
                         ),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(right: 25, top: 50),
                       child: CloseBtn(),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(25),
                   child: isLoading
-                      ? CircularProgressIndicator()
+                      ? const CircularProgressIndicator()
                       : categoryList.isEmpty
-                          ? Text('No categories available.')
+                          ? const Text('No categories available.')
                           : ListView.builder(
                               shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: categoryList.length,
                               itemBuilder: (context, index) {
                                 final category = categoryList[index];
                                 return Column(
                                   children: [
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     CategoryItem(category),
-                                    Divider(
+                                    const Divider(
                                       color: Color(0xffDDDDDD),
                                       thickness: 1.0,
                                       height: 0.0,
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                   ],
                                 );
                               },
@@ -168,7 +167,7 @@ class _CategoryItemState extends State<CategoryItem> {
                   },
                   child: Text(
                     widget.category.category[0],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
@@ -181,7 +180,7 @@ class _CategoryItemState extends State<CategoryItem> {
                   child: IconButton(
                     icon: Icon(
                       isExpanded ? Icons.remove : Icons.add,
-                      color: Color(0xff0269E9),
+                      color: const Color(0xff0269E9),
                     ),
                     onPressed: () {
                       setState(() {
@@ -198,7 +197,8 @@ class _CategoryItemState extends State<CategoryItem> {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 child: Column(
                   children: [
                     GestureDetector(
@@ -216,13 +216,13 @@ class _CategoryItemState extends State<CategoryItem> {
                       },
                       child: Text(
                         widget.category.category[i],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),

@@ -37,7 +37,6 @@ class _HorizontalScrollSectionContestState
       setState(() {
         isLoading = false;
       });
-      print('Error: $error');
     }
   }
 

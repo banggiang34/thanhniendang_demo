@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Data/Contests/fetchDataContest.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCollectionPage.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/loginScreen.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Auth/loginScreen.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/contestGridPage.dart';
@@ -16,6 +16,7 @@ import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataHighLightNews.dar
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataLatestNews.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/horizontalScrollSectionContest.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Personal/personalPage.dart';
 
 class MainScrollPage extends StatefulWidget {
   final String userName;
@@ -307,7 +308,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                NewsCollectionPage(),
+                                                const NewsCollectionPage(),
                                           ),
                                         ),
                                         icon: Image.asset(
@@ -337,7 +338,18 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: IconButton(
-                                        onPressed: () => print('conmeo'),
+                                        onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const PersonalPage(
+                                              email: 'sfsd@sd.c',
+                                              name: 'D  D',
+                                              phoneNumber: '003493049',
+                                              userImageUrl: '',
+                                            ),
+                                          ),
+                                        ),
                                         icon: Image.asset(
                                             'images/homescroll4.png'),
                                       ),
@@ -591,7 +603,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NewsCollectionPage(),
+                              builder: (context) => const NewsCollectionPage(),
                             ),
                           );
                         },

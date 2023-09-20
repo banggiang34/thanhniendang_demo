@@ -50,11 +50,9 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  child: Image.network(
-                    campaignData.imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                Image.network(
+                  campaignData.imagePath,
+                  fit: BoxFit.cover,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20),
@@ -94,7 +92,7 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
                               ),
                               child: Text(
                                 campaignData.status,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -116,21 +114,19 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Container(
-                        child: Row(
-                          children: [
-                            Image.asset('images/calendar1.png'),
-                            const SizedBox(width: 5),
-                            Text(
-                              'Đăng vào ${campaignData.postedDate}',
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff8A8A8A),
-                              ),
-                            )
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Image.asset('images/calendar1.png'),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Đăng vào ${campaignData.postedDate}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff8A8A8A),
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 20),
                       Column(
@@ -380,7 +376,7 @@ class _DetailCampaignPageState extends State<DetailCampaignPage> {
                           height: 120,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
-                            return Text('Image not available');
+                            return const Text('Image not available');
                           },
                         ),
                       );

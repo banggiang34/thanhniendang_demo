@@ -48,7 +48,7 @@ class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
           title: Text(
             widget.headerTitle,
             maxLines: 1,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: Color(0xff1F1F1F),
@@ -68,16 +68,17 @@ class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewsCategoriesPage()),
+                MaterialPageRoute(
+                    builder: (context) => const NewsCategoriesPage()),
               );
             },
             icon: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xff0269E9),
               ),
               child: Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Image.asset('images/menu1.png'),
               ),
             ),
@@ -91,7 +92,7 @@ class _CategorizedNewsPageState extends State<CategorizedNewsPage> {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: categorizedNewsList.isEmpty
-                  ? CategorizedNewsBlankPage()
+                  ? const CategorizedNewsBlankPage()
                   : VerticalScrollSectionNews(
                       newsDataList: categorizedNewsList),
             ),

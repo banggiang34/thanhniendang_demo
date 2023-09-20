@@ -42,7 +42,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        flexibleSpace: FlexibleSpaceBar(
+        flexibleSpace: const FlexibleSpaceBar(
           title: Text(
             'Tin tức',
             maxLines: 1,
@@ -66,16 +66,17 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NewsCategoriesPage()),
+                MaterialPageRoute(
+                    builder: (context) => const NewsCategoriesPage()),
               );
             },
             icon: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xff0269E9),
               ),
               child: Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Image.asset('images/menu1.png'),
               ),
             ),
@@ -88,7 +89,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20, top: 15),
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -104,7 +105,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
                 HighLightNews(
                   highlightNewsList: highLightNewsList,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 20, top: 15),
                   child: Align(
                     alignment: Alignment.centerLeft,
