@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
-import 'detailCampaignPage.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/Page/detailContestPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
+import 'package:thanh_nien_da_nang/Data/Contests/fetchDataDetailContest.dart';
 
-class HorizontalScrollSectionCampaign extends StatefulWidget {
+class HorizontalScrollSectionContest extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchData;
 
-  HorizontalScrollSectionCampaign({required this.fetchData});
+  HorizontalScrollSectionContest({required this.fetchData});
 
   @override
-  _HorizontalScrollSectionCampaignState createState() =>
-      _HorizontalScrollSectionCampaignState();
+  _HorizontalScrollSectionContestState createState() =>
+      _HorizontalScrollSectionContestState();
 }
 
-class _HorizontalScrollSectionCampaignState
-    extends State<HorizontalScrollSectionCampaign> {
+class _HorizontalScrollSectionContestState
+    extends State<HorizontalScrollSectionContest> {
   List<CategorizedTilesData> newsDataList = [];
   bool isLoading = true;
 
@@ -40,8 +40,8 @@ class _HorizontalScrollSectionCampaignState
     }
   }
 
-  Future<CampaignDetailData> fetchCampaignData(int id) async {
-    final contestData = await fetchDataDetailCampaign.fetchDataById(id);
+  Future<ContestDetailData> fetchContestData(int id) async {
+    final contestData = await fetchDataDetailContest.fetchDataById(id);
     return contestData;
   }
 
@@ -69,13 +69,13 @@ class _HorizontalScrollSectionCampaignState
                   joined: newsData.joined,
                   callBack: () {
                     int id = newsData.id;
-                    fetchCampaignData(id).then((contestData) {
+                    fetchContestData(id).then((contestData) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailCampaignPage(
+                          builder: (context) => DetailContestPage(
                             id: id,
-                            campaignData: contestData,
+                            contestData: contestData,
                           ),
                         ),
                       );

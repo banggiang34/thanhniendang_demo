@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
-import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/detailContestPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/Page/detailCampaignPage.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
-import 'package:thanh_nien_da_nang/Data/Contests/fetchDataDetailContest.dart';
+import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
 
-class HorizontalScrollSectionContest extends StatefulWidget {
+class HorizontalScrollSectionCampaign extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchData;
 
-  HorizontalScrollSectionContest({required this.fetchData});
+  HorizontalScrollSectionCampaign({required this.fetchData});
 
   @override
-  _HorizontalScrollSectionContestState createState() =>
-      _HorizontalScrollSectionContestState();
+  _HorizontalScrollSectionCampaignState createState() =>
+      _HorizontalScrollSectionCampaignState();
 }
 
-class _HorizontalScrollSectionContestState
-    extends State<HorizontalScrollSectionContest> {
+class _HorizontalScrollSectionCampaignState
+    extends State<HorizontalScrollSectionCampaign> {
   List<CategorizedTilesData> newsDataList = [];
   bool isLoading = true;
 
@@ -40,8 +40,8 @@ class _HorizontalScrollSectionContestState
     }
   }
 
-  Future<ContestDetailData> fetchContestData(int id) async {
-    final contestData = await fetchDataDetailContest.fetchDataById(id);
+  Future<CampaignDetailData> fetchCampaignData(int id) async {
+    final contestData = await fetchDataDetailCampaign.fetchDataById(id);
     return contestData;
   }
 
@@ -69,13 +69,13 @@ class _HorizontalScrollSectionContestState
                   joined: newsData.joined,
                   callBack: () {
                     int id = newsData.id;
-                    fetchContestData(id).then((contestData) {
+                    fetchCampaignData(id).then((contestData) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailContestPage(
+                          builder: (context) => DetailCampaignPage(
                             id: id,
-                            contestData: contestData,
+                            campaignData: contestData,
                           ),
                         ),
                       );

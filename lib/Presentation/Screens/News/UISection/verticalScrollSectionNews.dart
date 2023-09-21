@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/verticalTile.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/detailNewsPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/detailNewsPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataDetailNews.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/UISection/verticalScrollSectionNews.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataHighLightNews.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataLatestNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/highlightNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/UISection/highlightNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/newsCategoriesPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
 class NewsCollectionPage extends StatefulWidget {
@@ -14,20 +14,35 @@ class NewsCollectionPage extends StatefulWidget {
 }
 
 class _NewsCollectionPageState extends State<NewsCollectionPage> {
+  bool isLoading = false;
+
+  @override
   void initState() {
     super.initState();
+    _refreshData(); // Initial data load
+  }
+
+  Future<void> _refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(Duration(seconds: 2)); // Simulate data fetching
+
     fetchHighLightNews().then(
       (newsData) {
         setState(() {
           highLightNewsList = newsData;
+          isLoading = false;
         });
       },
     );
 
-    fetchLatestNews().then(
+    await fetchLatestNews().then(
       (newsData) {
         setState(() {
           latestNewsList = newsData;
+          isLoading = false;
         });
       },
     );
@@ -86,44 +101,48 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Tin nổi bật',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+          child: RefreshIndicator(
+            onRefresh: _refreshData,
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, top: 15),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Tin nổi bật',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                HighLightNews(
-                  highlightNewsList: highLightNewsList,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 15),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Tin tức mới',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                  HighLightNews(
+                    highlightNewsList: highLightNewsList,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, top: 15),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Tin tức mới',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child:
-                      VerticalScrollSectionNews(newsDataList: latestNewsList),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child:
+                        VerticalScrollSectionNews(newsDataList: latestNewsList),
+                  )
+                ],
+              ),
             ),
           ),
         ),

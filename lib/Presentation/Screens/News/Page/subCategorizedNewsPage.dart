@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataSubCategorizedNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/newsCategoriesPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/newsCategoriesPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/verticalScrollSectionNews.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/UISection/verticalScrollSectionNews.dart';
 
 class SubCategorizedNewsPage extends StatefulWidget {
   final int value;

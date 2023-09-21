@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/closeButton.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/categorizedNewsPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/categorizedNewsPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataNewsCategories.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsCategoriesData.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/subCategorizedNewsPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/subCategorizedNewsPage.dart';
 
 class NewsCategoriesPage extends StatefulWidget {
   const NewsCategoriesPage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
     fetchCategories();
   }
 
-  void fetchCategories() async {
+  Future<void> fetchCategories() async {
     try {
       final fetchedCategories = await fetchNewsCategories();
       setState(() {
@@ -37,90 +37,98 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
     }
   }
 
+  Future<void> _handleRefresh() async {
+    // Fetch the categories again when pulling to refresh
+    await fetchCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Image.asset(
-                      'images/newscategories.png',
-                      width: double.infinity,
-                      height: 250,
-                      fit: BoxFit.cover,
-                      color: Colors.blue.withOpacity(0.5),
-                      colorBlendMode: BlendMode.overlay,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0, vertical: 10),
-                      height: 250,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                          colors: [
-                            Colors.transparent,
-                            const Color(0xff0269E9).withOpacity(0.2),
-                            const Color(0xff0269E9).withOpacity(0.5),
-                            const Color(0xff0269E9).withOpacity(0.6),
-                            const Color(0xff0269E9).withOpacity(0.8),
-                          ],
+      body: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Image.asset(
+                        'images/newscategories.png',
+                        width: double.infinity,
+                        height: 250,
+                        fit: BoxFit.cover,
+                        color: Colors.blue.withOpacity(0.5),
+                        colorBlendMode: BlendMode.overlay,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 0, vertical: 10),
+                        height: 250,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft,
+                            colors: [
+                              Colors.transparent,
+                              const Color(0xff0269E9).withOpacity(0.2),
+                              const Color(0xff0269E9).withOpacity(0.5),
+                              const Color(0xff0269E9).withOpacity(0.6),
+                              const Color(0xff0269E9).withOpacity(0.8),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const Positioned(
-                      bottom: 0,
-                      child: Padding(
-                        padding: EdgeInsets.all(25),
-                        child: Text(
-                          'Danh mục tin tức',
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
+                      const Positioned(
+                        bottom: 0,
+                        child: Padding(
+                          padding: EdgeInsets.all(25),
+                          child: Text(
+                            'Danh mục tin tức',
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          ),
                         ),
                       ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 25, top: 50),
-                      child: CloseBtn(),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: isLoading
-                      ? const CircularProgressIndicator()
-                      : categoryList.isEmpty
-                          ? const Text('No categories available.')
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: categoryList.length,
-                              itemBuilder: (context, index) {
-                                final category = categoryList[index];
-                                return Column(
-                                  children: [
-                                    const SizedBox(height: 10),
-                                    CategoryItem(category),
-                                    const Divider(
-                                      color: Color(0xffDDDDDD),
-                                      thickness: 1.0,
-                                      height: 0.0,
-                                    ),
-                                    const SizedBox(height: 10),
-                                  ],
-                                );
-                              },
-                            ),
-                ),
-              ],
+                      const Padding(
+                        padding: EdgeInsets.only(right: 25, top: 50),
+                        child: CloseBtn(),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : categoryList.isEmpty
+                            ? const Text('No categories available.')
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: categoryList.length,
+                                itemBuilder: (context, index) {
+                                  final category = categoryList[index];
+                                  return Column(
+                                    children: [
+                                      const SizedBox(height: 10),
+                                      CategoryItem(category),
+                                      const Divider(
+                                        color: Color(0xffDDDDDD),
+                                        thickness: 1.0,
+                                        height: 0.0,
+                                      ),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  );
+                                },
+                              ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
