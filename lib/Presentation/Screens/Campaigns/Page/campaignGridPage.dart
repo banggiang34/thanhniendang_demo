@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/Page/detailCampaignPage.dart';
 import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
-import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Data/Campaigns/campaignDetailData.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/Campaigns/UISection/gridSectionCampaign.dart';
 
 class CampaignGridPage extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchDataOnGoing;
@@ -129,8 +128,10 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 15),
-            child: OnInOutGoingButton(
-              selectedButtonIndex: _currentPage,
+            child: Center(
+              child: OnInOutGoingButton(
+                selectedButtonIndex: _currentPage,
+              ),
             ),
           ),
           Expanded(
@@ -143,215 +144,20 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                 fetchData(index + 1);
               },
               children: [
-                AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.light,
-                  child: GestureDetector(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 11, vertical: 15),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: isLoadingOnGoing
-                                  ? const CircularProgressIndicator()
-                                  : (dataOnGoing == null ||
-                                          dataOnGoing!.isEmpty)
-                                      ? widget.blankPage
-                                      : Wrap(
-                                          spacing: 0,
-                                          runSpacing: 15,
-                                          alignment: WrapAlignment.start,
-                                          children:
-                                              dataOnGoing!.map((campaign) {
-                                            return SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.45,
-                                              child: HorizontalTile(
-                                                id: campaign.id,
-                                                imagePath: campaign.imagePath,
-                                                categoryimagePath:
-                                                    campaign.categoryimagePath,
-                                                category: campaign.category,
-                                                title: campaign.title,
-                                                date: campaign.date,
-                                                todate: campaign.todate,
-                                                time: campaign.time,
-                                                joined: campaign.joined,
-                                                callBack: () {
-                                                  int id = dataOnGoing!
-                                                      .indexWhere((element) =>
-                                                          element.id ==
-                                                          campaign.id);
-                                                  fetchCampaignData(id)
-                                                      .then((campaignData) {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailCampaignPage(
-                                                          id: id,
-                                                          campaignData:
-                                                              campaignData,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                GridSectionCampaign(
+                  loadingBoolean: isLoadingOnGoing,
+                  dataList: dataOnGoing,
+                  blankPage: widget.blankPage,
                 ),
-                AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.light,
-                  child: GestureDetector(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 11, vertical: 15),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: isLoadingComingSoon
-                                  ? const CircularProgressIndicator()
-                                  : (dataComingSoon == null ||
-                                          dataComingSoon!.isEmpty)
-                                      ? widget.blankPage
-                                      : Wrap(
-                                          spacing: 0,
-                                          runSpacing: 15,
-                                          alignment: WrapAlignment.start,
-                                          children:
-                                              dataComingSoon!.map((campaign) {
-                                            return SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.45,
-                                              child: HorizontalTile(
-                                                id: campaign.id,
-                                                imagePath: campaign.imagePath,
-                                                categoryimagePath:
-                                                    campaign.categoryimagePath,
-                                                category: campaign.category,
-                                                title: campaign.title,
-                                                date: campaign.date,
-                                                todate: campaign.todate,
-                                                time: campaign.time,
-                                                joined: campaign.joined,
-                                                callBack: () {
-                                                  int id = dataComingSoon!
-                                                      .indexWhere((element) =>
-                                                          element.id ==
-                                                          campaign.id);
-                                                  fetchCampaignData(id)
-                                                      .then((campaignData) {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailCampaignPage(
-                                                          id: id,
-                                                          campaignData:
-                                                              campaignData,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                GridSectionCampaign(
+                  loadingBoolean: isLoadingComingSoon,
+                  dataList: dataComingSoon,
+                  blankPage: widget.blankPage,
                 ),
-                AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.light,
-                  child: GestureDetector(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 15),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: isLoadingFinished
-                                  ? const CircularProgressIndicator()
-                                  : (dataFinished == null ||
-                                          dataFinished!.isEmpty)
-                                      ? widget.blankPage
-                                      : Wrap(
-                                          //spacing: 0,
-                                          //runSpacing: 0,
-                                          alignment: WrapAlignment.start,
-                                          children:
-                                              dataFinished!.map((campaign) {
-                                            return SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.45,
-                                              child: HorizontalTile(
-                                                id: campaign.id,
-                                                imagePath: campaign.imagePath,
-                                                categoryimagePath:
-                                                    campaign.categoryimagePath,
-                                                category: campaign.category,
-                                                title: campaign.title,
-                                                date: campaign.date,
-                                                todate: campaign.todate,
-                                                time: campaign.time,
-                                                joined: campaign.joined,
-                                                callBack: () {
-                                                  int id = dataFinished!
-                                                      .indexWhere((element) =>
-                                                          element.id ==
-                                                          campaign.id);
-                                                  fetchCampaignData(id)
-                                                      .then((campaignData) {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailCampaignPage(
-                                                          id: id,
-                                                          campaignData:
-                                                              campaignData,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                GridSectionCampaign(
+                  loadingBoolean: isLoadingFinished,
+                  dataList: dataFinished,
+                  blankPage: widget.blankPage,
                 ),
               ],
             ),

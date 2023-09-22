@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
+import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/horizontalTile.dart';
 import 'package:thanh_nien_da_nang/Data/Contests/fetchDataDetailContest.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/Page/detailContestPage.dart';
 
-class GridSection extends StatefulWidget {
+class GridSectionContest extends StatefulWidget {
   final bool loadingBoolean;
-  final List dataList;
+  final List<CategorizedTilesData>? dataList;
   final Widget blankPage;
-  const GridSection({
+
+  const GridSectionContest({
     super.key,
     required this.loadingBoolean,
     required this.dataList,
@@ -17,10 +19,10 @@ class GridSection extends StatefulWidget {
   });
 
   @override
-  State<GridSection> createState() => _GridSectionState();
+  State<GridSectionContest> createState() => _GridSectionContestState();
 }
 
-class _GridSectionState extends State<GridSection> {
+class _GridSectionContestState extends State<GridSectionContest> {
   Future<ContestDetailData> fetchContestData(int id) async {
     final contestData = await fetchDataDetailContest.fetchDataById(id);
     return contestData;
@@ -40,7 +42,21 @@ class _GridSectionState extends State<GridSection> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: widget.loadingBoolean
-                      ? const CircularProgressIndicator()
+                      ? Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 3,
+                                blurRadius: 10,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: const CircularProgressIndicator(),
+                        )
                       : (widget.dataList == null || widget.dataList!.isEmpty)
                           ? widget.blankPage
                           : Wrap(
