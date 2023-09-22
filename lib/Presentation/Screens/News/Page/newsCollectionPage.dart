@@ -27,7 +27,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
       isLoading = true;
     });
 
-    await Future.delayed(Duration(seconds: 2)); // Simulate data fetching
+    await Future.delayed(Duration(seconds: 2));
 
     fetchHighLightNews().then(
       (newsData) {

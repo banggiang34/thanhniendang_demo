@@ -24,7 +24,6 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
   final FetchDataRelatedNews fetchDataRelatedNews = FetchDataRelatedNews();
   List<NewsTilesData> relatedNewsList = [];
 
-  // Add a GlobalKey for RefreshIndicator
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
@@ -41,17 +40,7 @@ class _DetailNewsPageState extends State<DetailNewsPage> {
   }
 
   Future<void> _refreshData() async {
-    // Fetch new related news data here or update the existing data
-    // For example:
-    // final updatedData = await fetchDataRelatedNews.fetchDataById(widget.id);
-
-    // Simulate a delay for demonstration purposes (you can remove this)
     await Future.delayed(Duration(seconds: 2));
-
-    setState(() {
-      // Update the relatedNewsList with the new data
-      // relatedNewsList = updatedData;
-    });
   }
 
   @override

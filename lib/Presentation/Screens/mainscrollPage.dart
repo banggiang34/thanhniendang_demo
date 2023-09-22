@@ -65,8 +65,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
       });
     } finally {
       setState(() {
-        isLoading =
-            false; // Set isLoading to false when data loading is complete
+        isLoading = false;
       });
     }
   }
@@ -96,15 +95,19 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       Image.asset(
                         'images/login.png',
                         width: double.infinity,
-                        height: 250,
+                        //height: 250,
+                        height: MediaQuery.of(context).size.height * 0.3,
                         fit: BoxFit.cover,
                         color: Colors.blue.withOpacity(0.5),
                         colorBlendMode: BlendMode.overlay,
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 0, vertical: 10),
-                        height: 250,
+                          horizontal: 0,
+                          vertical: 10,
+                        ),
+                        //height: 250,
+                        height: MediaQuery.of(context).size.height * 0.3,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerRight,
@@ -119,16 +122,19 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           ),
                         ),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 32),
+                          padding: EdgeInsets.symmetric(
+                              vertical:
+                                  MediaQuery.of(context).size.height * 0.04),
                           child: Align(
                             alignment: Alignment.bottomCenter,
                             child: ListTile(
                               title: const Text(
                                 'Tuổi trẻ Đà Nẵng',
                                 style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
                               ),
                               subtitle: Text(
                                 widget.userName,
@@ -147,29 +153,24 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                       onPressed: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
+                                          builder: (context) => LoginScreen(),
+                                        ),
                                       ),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const Text(
-                                            '\nĐăng nhập',
+                                            'Đăng nhập',
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w600,
                                                 color: Colors.white),
                                           ),
                                           const SizedBox(width: 5),
-                                          Column(
-                                            children: [
-                                              const SizedBox(height: 23),
-                                              Image.asset(
-                                                'images/arrow-circle-right1.png',
-                                                width: 22,
-                                                height: 22,
-                                              ),
-                                            ],
+                                          Image.asset(
+                                            'images/arrow-circle-right1.png',
+                                            width: 22,
+                                            height: 22,
                                           ),
                                         ],
                                       ),
@@ -180,35 +181,39 @@ class _MainScrollPageState extends State<MainScrollPage> {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 50),
+                            horizontal: 10, vertical: 30),
                         child: Image.asset(
                           'images/logodcs.png',
-                          width: 70,
-                          height: 70,
+                          width: MediaQuery.of(context).size.width * 0.12,
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 50),
+                            horizontal: 10, vertical: 10),
                         child: Align(
                           alignment: Alignment.topRight,
-                          child: IconButton(
-                            onPressed: () => print('conmeo'),
-                            icon: Image.asset(
-                              'images/bellnoti.png',
-                              fit: BoxFit.fill,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            child: IconButton(
+                              onPressed: () => print('conmeo'),
+                              icon: Image.asset(
+                                'images/bellnoti.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            iconSize: 50,
                           ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        height: 350,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        //height: 350,
+                        height: MediaQuery.of(context).size.height * 0.45,
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
-                            height: 138,
+                            //height: 138,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            width: double.infinity,
                             decoration: BoxDecoration(
                               color: const Color(0xffFFFFFF),
                               borderRadius: BorderRadius.circular(20),
@@ -223,16 +228,16 @@ class _MainScrollPageState extends State<MainScrollPage> {
                             ),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 20),
+                                horizontal: 20,
+                                vertical: 20,
+                              ),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
                                       Container(
-                                        width: 50,
-                                        height: 50,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffF0F6FD)
                                               .withOpacity(0.9),
@@ -278,8 +283,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 50,
-                                        height: 50,
+                                        // width: 50,
+                                        // height: 50,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffF0F6FD)
                                               .withOpacity(0.9),
@@ -325,8 +330,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 50,
-                                        height: 50,
+                                        // width: 50,
+                                        // height: 50,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffF0F6FD)
                                               .withOpacity(0.9),
@@ -360,8 +365,8 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                   Column(
                                     children: [
                                       Container(
-                                        width: 50,
-                                        height: 50,
+                                        // width: 50,
+                                        // height: 50,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffF0F6FD)
                                               .withOpacity(0.9),

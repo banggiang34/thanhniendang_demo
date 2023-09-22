@@ -38,7 +38,6 @@ class _NewsCategoriesPageState extends State<NewsCategoriesPage> {
   }
 
   Future<void> _handleRefresh() async {
-    // Fetch the categories again when pulling to refresh
     await fetchCategories();
   }
 
@@ -151,7 +150,7 @@ class _CategoryItemState extends State<CategoryItem> {
 
   @override
   Widget build(BuildContext context) {
-    final value = widget.category.value; // Extract the value
+    final value = widget.category.value;
 
     return Column(
       children: [
@@ -167,8 +166,7 @@ class _CategoryItemState extends State<CategoryItem> {
                       MaterialPageRoute(
                         builder: (context) => CategorizedNewsPage(
                           value: value,
-                          headerTitle: widget.category.category[
-                              0], // Use the category name as the header title
+                          headerTitle: widget.category.category[0],
                         ),
                       ),
                     );
@@ -216,8 +214,7 @@ class _CategoryItemState extends State<CategoryItem> {
                           MaterialPageRoute(
                             builder: (context) => SubCategorizedNewsPage(
                               value: value,
-                              headerTitle: widget.category.category[
-                                  0], // Use the category name as the header title
+                              headerTitle: widget.category.category[0],
                             ),
                           ),
                         );

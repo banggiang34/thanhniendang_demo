@@ -13,7 +13,7 @@ class HorizontalTile extends StatelessWidget {
   final Function callBack;
 
   const HorizontalTile({
-    super.key,
+    Key? key,
     required this.imagePath,
     required this.categoryimagePath,
     required this.category,
@@ -38,18 +38,20 @@ class HorizontalTile extends StatelessWidget {
               callBack();
             },
             child: Container(
-              width: 165,
+              width: MediaQuery.of(context).size.width * 0.40,
+              height: MediaQuery.of(context).size.height * 0.34,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
                     borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(10),
-                        topLeft: Radius.circular(10)),
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
+                    ),
                     child: Stack(
                       children: [
                         AspectRatio(
-                          aspectRatio: 99 / 98,
+                          aspectRatio: 130 / 98,
                           child: Image.network(imagePath, fit: BoxFit.cover),
                         ),
                         Positioned(
@@ -58,7 +60,9 @@ class HorizontalTile extends StatelessWidget {
                             visible: category.isNotEmpty,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 20),
+                                horizontal: 8,
+                                vertical: 20,
+                              ),
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Container(
@@ -70,7 +74,8 @@ class HorizontalTile extends StatelessWidget {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
+                                      horizontal: 8,
+                                    ),
                                     child: Row(
                                       children: [
                                         //Image.network(categoryimagePath),
@@ -101,7 +106,9 @@ class HorizontalTile extends StatelessWidget {
                             visible: joined.isNotEmpty,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 20),
+                                horizontal: 8,
+                                vertical: 20,
+                              ),
                               child: FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Container(
@@ -114,7 +121,8 @@ class HorizontalTile extends StatelessWidget {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
+                                      horizontal: 8,
+                                    ),
                                     child: Row(
                                       children: [
                                         Image.asset('images/users1.png'),
@@ -165,21 +173,29 @@ class HorizontalTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 10),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.0005,
+                            ),
                             Container(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              padding: const EdgeInsets.only(
+                                top: 8,
+                                bottom: 8,
+                              ),
                               child: Text(
                                 title,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 11,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black,
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height *
+                                    0.0005),
                             Row(
                               children: [
                                 Image.asset('images/calendar1.png'),

@@ -160,61 +160,47 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                   : (dataOnGoing == null ||
                                           dataOnGoing!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataOnGoing?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final contest =
-                                                      dataOnGoing![index];
-                                                  return HorizontalTile(
-                                                    id: contest.id,
-                                                    imagePath:
-                                                        contest.imagePath,
-                                                    categoryimagePath: contest
-                                                        .categoryimagePath,
-                                                    category: contest.category,
-                                                    title: contest.title,
-                                                    date: contest.date,
-                                                    todate: contest.todate,
-                                                    time: contest.time,
-                                                    joined: contest.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataOnGoing![index]
-                                                              .id;
-                                                      fetchContestData(id)
-                                                          .then((contestData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailContestPage(
-                                                              id: id,
-                                                              contestData:
-                                                                  contestData,
-                                                            ),
+                                      : Wrap(
+                                          spacing: 0, // Cross-axis spacing
+                                          runSpacing: 0, // Main-axis spacing
+                                          children: [
+                                            for (final contest in dataOnGoing!)
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.45,
+                                                child: HorizontalTile(
+                                                  id: contest.id,
+                                                  imagePath: contest.imagePath,
+                                                  categoryimagePath:
+                                                      contest.categoryimagePath,
+                                                  category: contest.category,
+                                                  title: contest.title,
+                                                  date: contest.date,
+                                                  todate: contest.todate,
+                                                  time: contest.time,
+                                                  joined: contest.joined,
+                                                  callBack: () {
+                                                    int id = contest.id;
+                                                    fetchContestData(id)
+                                                        .then((contestData) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DetailContestPage(
+                                                            id: id,
+                                                            contestData:
+                                                                contestData,
                                                           ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
-                                                },
+                                                        ),
+                                                      );
+                                                    });
+                                                  },
+                                                ),
                                               ),
-                                            ),
-                                          ),
+                                          ],
                                         ),
                             )
                           ],
@@ -240,61 +226,48 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                   : (dataComingSoon == null ||
                                           dataComingSoon!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataComingSoon?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      dataComingSoon![index];
-                                                  return HorizontalTile(
-                                                    id: campaign.id,
-                                                    imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
-                                                        .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataComingSoon![index]
-                                                              .id;
-                                                      fetchContestData(id)
-                                                          .then((contestData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailContestPage(
-                                                              id: id,
-                                                              contestData:
-                                                                  contestData,
-                                                            ),
+                                      : Wrap(
+                                          spacing: 0, // Cross-axis spacing
+                                          runSpacing: 0, // Main-axis spacing
+                                          children: [
+                                            for (final campaign
+                                                in dataComingSoon!)
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.45,
+                                                child: HorizontalTile(
+                                                  id: campaign.id,
+                                                  imagePath: campaign.imagePath,
+                                                  categoryimagePath: campaign
+                                                      .categoryimagePath,
+                                                  category: campaign.category,
+                                                  title: campaign.title,
+                                                  date: campaign.date,
+                                                  todate: campaign.todate,
+                                                  time: campaign.time,
+                                                  joined: campaign.joined,
+                                                  callBack: () {
+                                                    int id = campaign.id;
+                                                    fetchContestData(id)
+                                                        .then((contestData) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DetailContestPage(
+                                                            id: id,
+                                                            contestData:
+                                                                contestData,
                                                           ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
-                                                },
+                                                        ),
+                                                      );
+                                                    });
+                                                  },
+                                                ),
                                               ),
-                                            ),
-                                          ),
+                                          ],
                                         ),
                             )
                           ],
@@ -320,61 +293,47 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                   : (dataFinished == null ||
                                           dataFinished!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataFinished?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final contest =
-                                                      dataFinished![index];
-                                                  return HorizontalTile(
-                                                    id: contest.id,
-                                                    imagePath:
-                                                        contest.imagePath,
-                                                    categoryimagePath: contest
-                                                        .categoryimagePath,
-                                                    category: contest.category,
-                                                    title: contest.title,
-                                                    date: contest.date,
-                                                    todate: contest.todate,
-                                                    time: contest.time,
-                                                    joined: contest.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataFinished![index]
-                                                              .id;
-                                                      fetchContestData(id)
-                                                          .then((contestData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailContestPage(
-                                                              id: id,
-                                                              contestData:
-                                                                  contestData,
-                                                            ),
+                                      : Wrap(
+                                          spacing: 0,
+                                          runSpacing: 0,
+                                          children: [
+                                            for (final contest in dataFinished!)
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.45,
+                                                child: HorizontalTile(
+                                                  id: contest.id,
+                                                  imagePath: contest.imagePath,
+                                                  categoryimagePath:
+                                                      contest.categoryimagePath,
+                                                  category: contest.category,
+                                                  title: contest.title,
+                                                  date: contest.date,
+                                                  todate: contest.todate,
+                                                  time: contest.time,
+                                                  joined: contest.joined,
+                                                  callBack: () {
+                                                    int id = contest.id;
+                                                    fetchContestData(id)
+                                                        .then((contestData) {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DetailContestPage(
+                                                            id: id,
+                                                            contestData:
+                                                                contestData,
                                                           ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
-                                                },
+                                                        ),
+                                                      );
+                                                    });
+                                                  },
+                                                ),
                                               ),
-                                            ),
-                                          ),
+                                          ],
                                         ),
                             )
                           ],

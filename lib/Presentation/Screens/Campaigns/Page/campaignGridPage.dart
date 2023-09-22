@@ -160,61 +160,51 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                   : (dataOnGoing == null ||
                                           dataOnGoing!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataOnGoing?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      dataOnGoing![index];
-                                                  return HorizontalTile(
-                                                    id: campaign.id,
-                                                    imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
-                                                        .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataOnGoing![index]
-                                                              .id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailCampaignPage(
-                                                              id: id,
-                                                              campaignData:
-                                                                  campaignData,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
+                                      : Wrap(
+                                          spacing: 0,
+                                          runSpacing: 15,
+                                          alignment: WrapAlignment.start,
+                                          children:
+                                              dataOnGoing!.map((campaign) {
+                                            return SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.45,
+                                              child: HorizontalTile(
+                                                id: campaign.id,
+                                                imagePath: campaign.imagePath,
+                                                categoryimagePath:
+                                                    campaign.categoryimagePath,
+                                                category: campaign.category,
+                                                title: campaign.title,
+                                                date: campaign.date,
+                                                todate: campaign.todate,
+                                                time: campaign.time,
+                                                joined: campaign.joined,
+                                                callBack: () {
+                                                  int id = dataOnGoing!
+                                                      .indexWhere((element) =>
+                                                          element.id ==
+                                                          campaign.id);
+                                                  fetchCampaignData(id)
+                                                      .then((campaignData) {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailCampaignPage(
+                                                          id: id,
+                                                          campaignData:
+                                                              campaignData,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
                                                 },
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          }).toList(),
                                         ),
                             )
                           ],
@@ -240,61 +230,51 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                   : (dataComingSoon == null ||
                                           dataComingSoon!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataComingSoon?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      dataComingSoon![index];
-                                                  return HorizontalTile(
-                                                    id: campaign.id,
-                                                    imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
-                                                        .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataComingSoon![index]
-                                                              .id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailCampaignPage(
-                                                              id: id,
-                                                              campaignData:
-                                                                  campaignData,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
+                                      : Wrap(
+                                          spacing: 0,
+                                          runSpacing: 15,
+                                          alignment: WrapAlignment.start,
+                                          children:
+                                              dataComingSoon!.map((campaign) {
+                                            return SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.45,
+                                              child: HorizontalTile(
+                                                id: campaign.id,
+                                                imagePath: campaign.imagePath,
+                                                categoryimagePath:
+                                                    campaign.categoryimagePath,
+                                                category: campaign.category,
+                                                title: campaign.title,
+                                                date: campaign.date,
+                                                todate: campaign.todate,
+                                                time: campaign.time,
+                                                joined: campaign.joined,
+                                                callBack: () {
+                                                  int id = dataComingSoon!
+                                                      .indexWhere((element) =>
+                                                          element.id ==
+                                                          campaign.id);
+                                                  fetchCampaignData(id)
+                                                      .then((campaignData) {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailCampaignPage(
+                                                          id: id,
+                                                          campaignData:
+                                                              campaignData,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
                                                 },
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          }).toList(),
                                         ),
                             )
                           ],
@@ -309,7 +289,7 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                     child: SingleChildScrollView(
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 11, vertical: 15),
+                            horizontal: 10, vertical: 15),
                         child: Column(
                           children: [
                             const SizedBox(height: 10),
@@ -320,61 +300,51 @@ class _CampaignGridPageState extends State<CampaignGridPage> {
                                   : (dataFinished == null ||
                                           dataFinished!.isEmpty)
                                       ? widget.blankPage
-                                      : GestureDetector(
-                                          child: SingleChildScrollView(
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              child: GridView.builder(
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 0,
-                                                  mainAxisSpacing: 0,
-                                                  childAspectRatio: 99 / 185,
-                                                ),
-                                                itemCount:
-                                                    dataFinished?.length ?? 0,
-                                                itemBuilder: (context, index) {
-                                                  final campaign =
-                                                      dataFinished![index];
-                                                  return HorizontalTile(
-                                                    id: campaign.id,
-                                                    imagePath:
-                                                        campaign.imagePath,
-                                                    categoryimagePath: campaign
-                                                        .categoryimagePath,
-                                                    category: campaign.category,
-                                                    title: campaign.title,
-                                                    date: campaign.date,
-                                                    todate: campaign.todate,
-                                                    time: campaign.time,
-                                                    joined: campaign.joined,
-                                                    callBack: () {
-                                                      int id =
-                                                          dataFinished![index]
-                                                              .id;
-                                                      fetchCampaignData(id)
-                                                          .then((campaignData) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                DetailCampaignPage(
-                                                              id: id,
-                                                              campaignData:
-                                                                  campaignData,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      });
-                                                    },
-                                                  );
+                                      : Wrap(
+                                          //spacing: 0,
+                                          //runSpacing: 0,
+                                          alignment: WrapAlignment.start,
+                                          children:
+                                              dataFinished!.map((campaign) {
+                                            return SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.45,
+                                              child: HorizontalTile(
+                                                id: campaign.id,
+                                                imagePath: campaign.imagePath,
+                                                categoryimagePath:
+                                                    campaign.categoryimagePath,
+                                                category: campaign.category,
+                                                title: campaign.title,
+                                                date: campaign.date,
+                                                todate: campaign.todate,
+                                                time: campaign.time,
+                                                joined: campaign.joined,
+                                                callBack: () {
+                                                  int id = dataFinished!
+                                                      .indexWhere((element) =>
+                                                          element.id ==
+                                                          campaign.id);
+                                                  fetchCampaignData(id)
+                                                      .then((campaignData) {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DetailCampaignPage(
+                                                          id: id,
+                                                          campaignData:
+                                                              campaignData,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
                                                 },
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          }).toList(),
                                         ),
                             )
                           ],

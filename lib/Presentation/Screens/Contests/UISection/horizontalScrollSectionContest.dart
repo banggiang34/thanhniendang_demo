@@ -49,7 +49,7 @@ class _HorizontalScrollSectionContestState
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      height: 320,
+      height: MediaQuery.of(context).size.height * 0.38,
       child: isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(

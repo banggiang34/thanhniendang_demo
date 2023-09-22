@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Data/News/fetching/fetchDataCategorizedNews.dart';
-import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/categorizedNewsBlankPage.dart';
+import 'package:thanh_nien_da_nang/Presentation/Screens/News/UISection/categorizedNewsBlankPage.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/Page/newsCategoriesPage.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/News/UISection/verticalScrollSectionNews.dart';
