@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Data/Campaigns/fetchDataDetailCampaign.dart';
 class HorizontalScrollSectionCampaign extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchData;
 
-  HorizontalScrollSectionCampaign({required this.fetchData});
+  const HorizontalScrollSectionCampaign({required this.fetchData});
 
   @override
   _HorizontalScrollSectionCampaignState createState() =>
@@ -48,7 +48,7 @@ class _HorizontalScrollSectionCampaignState
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.only(left: 20),
       height: MediaQuery.of(context).size.height * 0.35,
       child: isLoading
           ? const Center(child: CircularProgressIndicator())

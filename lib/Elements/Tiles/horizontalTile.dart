@@ -37,7 +37,7 @@ class HorizontalTile extends StatelessWidget {
             onTap: () {
               callBack();
             },
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.40,
               height: MediaQuery.of(context).size.height * 0.34,
               child: Column(

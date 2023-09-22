@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Thanh nien vn',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'SF-Pro'),
-      home: MainScrollPage(),
+      home: const MainScrollPage(),
     );
   }
 }

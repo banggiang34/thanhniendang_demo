@@ -85,7 +85,7 @@ class _PersonalPageState extends State<PersonalPage> {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -134,7 +134,7 @@ class _PersonalPageState extends State<PersonalPage> {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                   elevation: 0,
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

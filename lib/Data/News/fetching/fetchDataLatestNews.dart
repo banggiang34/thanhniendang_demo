@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsTilesData.dart';
 
 Future<List<NewsTilesData>> fetchLatestNews() async {
-  final apiUrl = 'https://intern.try0.xyz/api/v1/article/news/?category/';
+  const apiUrl = 'https://intern.try0.xyz/api/v1/article/news/?category/';
   final response = await http.get(Uri.parse(apiUrl));
 
   if (response.statusCode == 200) {

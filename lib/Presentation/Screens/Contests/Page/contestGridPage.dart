@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/UISection/gridSectionContest.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
@@ -23,7 +22,7 @@ class ContestGridPage extends StatefulWidget {
 }
 
 class _ContestGridPageState extends State<ContestGridPage> {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   int _currentPage = 0;
 
   late Future<List<ContestDetailData>> contestDetailFuture;

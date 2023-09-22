@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Data/Contests/fetchDataDetailContest.dart';
 class HorizontalScrollSectionContest extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchData;
 
-  HorizontalScrollSectionContest({required this.fetchData});
+  const HorizontalScrollSectionContest({required this.fetchData});
 
   @override
   _HorizontalScrollSectionContestState createState() =>

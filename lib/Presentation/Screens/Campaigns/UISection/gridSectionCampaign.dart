@@ -35,10 +35,7 @@ class _GridSectionCampaignState extends State<GridSectionCampaign> {
       child: GestureDetector(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 11,
-              vertical: 15,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 15),
             child: Column(
               children: [
                 const SizedBox(height: 10),
@@ -48,46 +45,47 @@ class _GridSectionCampaignState extends State<GridSectionCampaign> {
                       ? const CircularProgressIndicator()
                       : (widget.dataList == null || widget.dataList!.isEmpty)
                           ? widget.blankPage
-                          : Wrap(
-                              spacing: 0,
-                              runSpacing: 15,
-                              alignment: WrapAlignment.start,
-                              children: widget.dataList!.map((campaign) {
-                                return SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                  child: HorizontalTile(
-                                    id: campaign.id,
-                                    imagePath: campaign.imagePath,
-                                    categoryimagePath:
-                                        campaign.categoryimagePath,
-                                    category: campaign.category,
-                                    title: campaign.title,
-                                    date: campaign.date,
-                                    todate: campaign.todate,
-                                    time: campaign.time,
-                                    joined: campaign.joined,
-                                    callBack: () {
-                                      int id = widget.dataList!.indexWhere(
-                                          (element) =>
-                                              element.id == campaign.id);
-                                      fetchCampaignData(id)
-                                          .then((campaignData) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DetailCampaignPage(
-                                              id: id,
-                                              campaignData: campaignData,
-                                            ),
-                                          ),
-                                        );
-                                      });
-                                    },
-                                  ),
-                                );
-                              }).toList(),
+                          : GestureDetector(
+                              child: SingleChildScrollView(
+                                child: Wrap(
+                                  spacing: 0,
+                                  runSpacing: 0,
+                                  children: widget.dataList!.map((campaign) {
+                                    return SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
+                                      child: HorizontalTile(
+                                        id: campaign.id,
+                                        imagePath: campaign.imagePath,
+                                        categoryimagePath:
+                                            campaign.categoryimagePath,
+                                        category: campaign.category,
+                                        title: campaign.title,
+                                        date: campaign.date,
+                                        todate: campaign.todate,
+                                        time: campaign.time,
+                                        joined: campaign.joined,
+                                        callBack: () {
+                                          int id = campaign.id;
+                                          fetchCampaignData(id)
+                                              .then((campaignData) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailCampaignPage(
+                                                  id: id,
+                                                  campaignData: campaignData,
+                                                ),
+                                              ),
+                                            );
+                                          });
+                                        },
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                             ),
                 )
               ],

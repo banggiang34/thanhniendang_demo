@@ -7,7 +7,7 @@ class BuildLogSignInBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () => callback(),
@@ -19,8 +19,8 @@ class BuildLogSignInBtn extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
-            primary: const Color(0xff0269E9),
-            onPrimary: Colors.white,
+            backgroundColor: const Color(0xff0269E9),
+            foregroundColor: Colors.white,
             elevation: 0),
         child: Text(labeltext),
       ),

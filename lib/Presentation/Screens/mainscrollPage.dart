@@ -21,7 +21,7 @@ import 'package:thanh_nien_da_nang/Presentation/Screens/Personal/personalPage.da
 class MainScrollPage extends StatefulWidget {
   final String userName;
   final bool isLoggedIn;
-  MainScrollPage(
+  const MainScrollPage(
       {this.userName = 'Xin chào, Bạn chưa đăng nhập',
       this.isLoggedIn = false});
 
@@ -145,7 +145,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                                 ),
                               ),
                               trailing: widget.isLoggedIn
-                                  ? Container(
+                                  ? const SizedBox(
                                       width: 10,
                                       height: 10,
                                     )
@@ -179,27 +179,32 @@ class _MainScrollPageState extends State<MainScrollPage> {
                           ),
                         ),
                       ),
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 30),
-                        child: Image.asset(
-                          'images/logodcs.png',
-                          width: MediaQuery.of(context).size.width * 0.12,
+                          horizontal: 10,
+                          vertical: 35,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Image.asset(
+                            'images/logodcs.png',
+                            width: MediaQuery.of(context).size.width * 0.12,
+                          ),
                         ),
                       ),
-                      Container(
+                      Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
+                          horizontal: 10,
+                          vertical: 35,
+                        ),
                         child: Align(
                           alignment: Alignment.topRight,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.2,
-                            child: IconButton(
-                              onPressed: () => print('conmeo'),
-                              icon: Image.asset(
-                                'images/bellnoti.png',
-                                fit: BoxFit.fill,
-                              ),
+                          child: IconButton(
+                            onPressed: () => print('conmeo'),
+                            icon: Image.asset(
+                              'images/bellnoti.png',
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
@@ -211,7 +216,6 @@ class _MainScrollPageState extends State<MainScrollPage> {
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
-                            //height: 138,
                             height: MediaQuery.of(context).size.height * 0.2,
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -414,7 +418,6 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   HighLightNews(
                     highlightNewsList: highLightNewsList,
                   ),
-
                   const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -685,7 +688,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   Stack(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 270,
                         child: Center(
                           child: RichText(

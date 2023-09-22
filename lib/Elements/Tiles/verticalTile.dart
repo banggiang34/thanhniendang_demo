@@ -27,7 +27,7 @@ class VerticalTile extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            child: Container(
+            child: SizedBox(
               width: 130,
               //height: 150,
               child: Stack(

@@ -27,7 +27,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
       isLoading = true;
     });
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     fetchHighLightNews().then(
       (newsData) {
@@ -104,7 +104,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
           child: RefreshIndicator(
             onRefresh: _refreshData,
             child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: [
                   const Padding(

@@ -8,7 +8,7 @@ import 'package:thanh_nien_da_nang/Data/News/dataTypes/newsDetailData.dart';
 class HighLightNews extends StatefulWidget {
   final List<NewsTilesData> highlightNewsList;
 
-  HighLightNews({
+  const HighLightNews({
     required this.highlightNewsList,
   });
 
@@ -147,7 +147,7 @@ class _HighLightNewsState extends State<HighLightNews> {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           height: 220,
           child: Align(
             alignment: Alignment.bottomCenter,
