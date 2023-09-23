@@ -55,7 +55,10 @@ class _GridSectionContestState extends State<GridSectionContest> {
                               ),
                             ],
                           ),
-                          child: const CircularProgressIndicator(),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: const CircularProgressIndicator(),
+                          ),
                         )
                       : (widget.dataList == null || widget.dataList!.isEmpty)
                           ? widget.blankPage

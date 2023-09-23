@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thanh_nien_da_nang/Elements/Buttons/oninoutGoingButton.dart';
 import 'package:thanh_nien_da_nang/Presentation/Screens/Contests/UISection/gridSectionContest.dart';
 import 'package:thanh_nien_da_nang/Elements/Tiles/categorizedTilesData.dart';
-import 'package:thanh_nien_da_nang/Data/Contests/contestDetailData.dart';
 
 class ContestGridPage extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchDataOnGoing;
@@ -10,22 +8,21 @@ class ContestGridPage extends StatefulWidget {
   final Future<List<CategorizedTilesData>> Function() fetchDataFinished;
   final Widget blankPage;
 
-  const ContestGridPage(
-      {Key? key,
-      required this.fetchDataOnGoing,
-      required this.fetchDataComingSoon,
-      required this.fetchDataFinished,
-      required this.blankPage});
+  const ContestGridPage({
+    Key? key,
+    required this.fetchDataOnGoing,
+    required this.fetchDataComingSoon,
+    required this.fetchDataFinished,
+    required this.blankPage,
+  });
 
   @override
   State<ContestGridPage> createState() => _ContestGridPageState();
 }
 
 class _ContestGridPageState extends State<ContestGridPage> {
-  final PageController _pageController = PageController();
+  PageController _pageController = PageController();
   int _currentPage = 0;
-
-  late Future<List<ContestDetailData>> contestDetailFuture;
 
   List<CategorizedTilesData>? dataOnGoing;
   List<CategorizedTilesData>? dataComingSoon;
@@ -34,6 +31,10 @@ class _ContestGridPageState extends State<ContestGridPage> {
   bool isLoadingComingSoon = true;
   bool isLoadingFinished = true;
 
+  List<String> pageNames = ["Đang diễn ra", "Sắp diễn ra", "Đã kết thúc"];
+
+  double _blueBoxLeft = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +42,9 @@ class _ContestGridPageState extends State<ContestGridPage> {
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page?.round() ?? 0;
+
+        _blueBoxLeft = _currentPage *
+            (MediaQuery.of(context).size.width / pageNames.length);
       });
     });
 
@@ -99,7 +103,7 @@ class _ContestGridPageState extends State<ContestGridPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Cuộc thi',
           style: TextStyle(
             fontSize: 17,
@@ -107,49 +111,109 @@ class _ContestGridPageState extends State<ContestGridPage> {
             color: Color(0xff1F1F1F),
           ),
         ),
-        backgroundColor: const Color(0xffFFFFFF),
+        backgroundColor: Color(0xffFFFFFF),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
       ),
-      backgroundColor: const Color(0xffFFFFFF),
+      backgroundColor: Color(0xffFFFFFF),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 15),
-            child: Center(
-              child: OnInOutGoingButton(
-                selectedButtonIndex: _currentPage,
-              ),
+            padding: const EdgeInsets.all(10),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      for (var i = 0; i < pageNames.length; i++)
+                        GestureDetector(
+                          onTap: () {
+                            // Animate to the selected page with a smooth transition
+                            _pageController.animateToPage(
+                              i,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              pageNames[i],
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: _currentPage == i
+                                    ? Colors.white
+                                    : Color(0xff1F1F1F),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 300),
+                  left: _blueBoxLeft,
+                  top: 0,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Color(0xff0269E9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        pageNames[_currentPage],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPage = index;
-                });
-                fetchData(index + 1);
-              },
+            child: Stack(
               children: [
-                GridSectionContest(
-                    loadingBoolean: isLoadingOnGoing,
-                    dataList: dataOnGoing,
-                    blankPage: widget.blankPage),
-                GridSectionContest(
-                  loadingBoolean: isLoadingComingSoon,
-                  dataList: dataComingSoon,
-                  blankPage: widget.blankPage,
+                PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                    fetchData(index + 1);
+                  },
+                  children: [
+                    GridSectionContest(
+                      loadingBoolean: isLoadingOnGoing,
+                      dataList: dataOnGoing,
+                      blankPage: widget.blankPage,
+                    ),
+                    GridSectionContest(
+                      loadingBoolean: isLoadingComingSoon,
+                      dataList: dataComingSoon,
+                      blankPage: widget.blankPage,
+                    ),
+                    GridSectionContest(
+                      loadingBoolean: isLoadingFinished,
+                      dataList: dataFinished,
+                      blankPage: widget.blankPage,
+                    )
+                  ],
                 ),
-                GridSectionContest(
-                    loadingBoolean: isLoadingFinished,
-                    dataList: dataFinished,
-                    blankPage: widget.blankPage)
               ],
             ),
           ),
