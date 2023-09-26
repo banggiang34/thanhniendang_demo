@@ -48,7 +48,7 @@ class _HorizontalScrollSectionContestState
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.only(left: 10),
       height: MediaQuery.of(context).size.height * 0.38,
       child: isLoading
           ? const Center(child: CircularProgressIndicator())
