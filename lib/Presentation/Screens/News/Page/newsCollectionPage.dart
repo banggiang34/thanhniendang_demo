@@ -108,7 +108,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(left: 20, top: 15),
+                    padding: EdgeInsets.only(left: 10, top: 15),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -124,7 +124,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
                     highlightNewsList: highLightNewsList,
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 20, top: 15),
+                    padding: EdgeInsets.only(left: 10, top: 15),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -137,7 +137,7 @@ class _NewsCollectionPageState extends State<NewsCollectionPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(10),
                     child:
                         VerticalScrollSectionNews(newsDataList: latestNewsList),
                   )

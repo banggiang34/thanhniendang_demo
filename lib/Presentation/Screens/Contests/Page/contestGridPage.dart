@@ -103,7 +103,7 @@ class _ContestGridPageState extends State<ContestGridPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Cuộc thi',
           style: TextStyle(
             fontSize: 17,
@@ -111,39 +111,64 @@ class _ContestGridPageState extends State<ContestGridPage> {
             color: Color(0xff1F1F1F),
           ),
         ),
-        backgroundColor: Color(0xffFFFFFF),
+        backgroundColor: const Color(0xffFFFFFF),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
       ),
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: const Color(0xffFFFFFF),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
             child: Stack(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 300),
+                  left: _blueBoxLeft,
+                  top: 0,
+                  child: Container(
+                    height: 60,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xff0269E9),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        pageNames[_currentPage],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.transparent,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       for (var i = 0; i < pageNames.length; i++)
                         GestureDetector(
                           onTap: () {
-                            // Animate to the selected page with a smooth transition
                             _pageController.animateToPage(
                               i,
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut,
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10),
                             child: Text(
                               pageNames[i],
                               style: TextStyle(
@@ -151,35 +176,12 @@ class _ContestGridPageState extends State<ContestGridPage> {
                                 fontWeight: FontWeight.w600,
                                 color: _currentPage == i
                                     ? Colors.white
-                                    : Color(0xff1F1F1F),
+                                    : const Color(0xff1F1F1F),
                               ),
                             ),
                           ),
                         ),
                     ],
-                  ),
-                ),
-                AnimatedPositioned(
-                  duration: Duration(milliseconds: 300),
-                  left: _blueBoxLeft,
-                  top: 0,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    height: 55,
-                    decoration: BoxDecoration(
-                      color: Color(0xff0269E9),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        pageNames[_currentPage],
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ],

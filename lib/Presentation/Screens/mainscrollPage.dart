@@ -420,7 +420,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         TextButton(
@@ -476,7 +476,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   const SizedBox(height: 25),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         TextButton(
@@ -532,7 +532,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   const SizedBox(height: 25),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
@@ -635,7 +635,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   const SizedBox(height: 25),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       children: [
                         TextButton(
@@ -682,7 +682,7 @@ class _MainScrollPageState extends State<MainScrollPage> {
                   ),
                   const SizedBox(height: 15),
                   Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(10),
                     child:
                         VerticalScrollSectionNews(newsDataList: latestNewsList),
                   ),

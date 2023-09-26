@@ -14,7 +14,7 @@ Future<List<NewsTilesData>> fetchLatestNews() async {
 
     for (var item in jsonData['items']) {
       DateTime dateTime = DateTime.parse(item['updated_at']);
-      String parsedDate = DateFormat.yMd().format(dateTime);
+      String parsedDate = DateFormat('dd/mm/yyyy').format(dateTime);
 
       latestNewsList.add(
         NewsTilesData(

@@ -34,7 +34,7 @@ class _HighLightNewsState extends State<HighLightNews> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [
               CarouselSlider(
